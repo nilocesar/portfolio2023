@@ -2,15 +2,52 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 
-export const Canvas = (props: any) => {
+interface ElementProps {
+  x: number;
+  y: number;
+  ox: number;
+  oy: number;
+  y2: number;
+  y1: number;
+  x2: number;
+  x1: number;
+  scale: number;
+  oTheta: number;
+  theta: number;
+  radius: number;
+  generation: number;
+  growing: boolean;
+  age: number;
+  wanderStep: number;
+  growthRate: number;
+  shrinkRate: number;
+  update: () => void;
+  render: (context: CanvasRenderingContext2D) => void;
+  destroy: () => void;
+}
+
+interface Config {
+  RENDER_MODE: 'segmented';
+  BRANCH_PROBABILITY: number;
+  MAX_CONCURRENT: number;
+  NUM_BRANCHES: number;
+  MIN_RADIUS: number;
+  MAX_RADIUS: number;
+  MIN_WANDER_STEP: number;
+  MAX_WANDER_STEP: number;
+  MIN_GROWTH_RATE: number;
+  MAX_GROWTH_RATE: number;
+  MIN_SHRINK_RATE: number;
+  MAX_SHRINK_RATE: number;
+  MIN_DIVERGENCE: number;
+  MAX_DIVERGENCE: number;
+}
+
+export const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [initCanvas, setInitCanvas] = useState(true);
 
-  const canvas = canvasRef.current;
-  // const context = canvasRef.current.getContext('2d');
-
-  const a = {};
-  const c = {
+  const config: Config = {
     RENDER_MODE: 'segmented',
     BRANCH_PROBABILITY: 0.05,
     MAX_CONCURRENT: 100,
@@ -26,136 +63,151 @@ export const Canvas = (props: any) => {
     MIN_DIVERGENCE: 0.01,
     MAX_DIVERGENCE: 0.05
   };
-  let d;
-
-  for (d in c) a[d] = c[d];
 
   const e = 2 * Math.PI;
   const b = Math.PI / 2;
-  let f = [];
-  const i = function (b, c, d, e, f, g) {
-    this.x = b;
-    this.y = c;
-    this.ox = b;
-    this.oy = c;
-    this.y2 = this.y1 = this.x2 = this.x1 = NaN;
-    this.scale = f || 1;
-    this.oTheta = this.theta = d;
-    this.radius = e;
-    this.generation = g || 1;
-    this.growing = !0;
-    this.age = 0;
-    this.wanderStep =
-      a.MIN_WANDER_STEP +
-      Math.random() * (a.MAX_WANDER_STEP - a.MIN_WANDER_STEP);
-    this.growthRate =
-      a.MIN_GROWTH_RATE +
-      Math.random() * (a.MAX_GROWTH_RATE - a.MIN_GROWTH_RATE);
-    this.shrinkRate =
-      a.MIN_SHRINK_RATE +
-      Math.random() * (a.MAX_SHRINK_RATE - a.MIN_SHRINK_RATE);
+  let fArray: ElementProps[] = [];
+
+  const base = (
+    posX: number,
+    posY: number,
+    posTheta: number,
+    radiusValue: number,
+    scaleValue: number,
+    generationValue: number
+  ): ElementProps => {
+    const element: ElementProps = {
+      x: posX,
+      y: posY,
+      ox: posX,
+      oy: posY,
+      y2: NaN,
+      y1: NaN,
+      x2: NaN,
+      x1: NaN,
+      scale: scaleValue || 1,
+      oTheta: posTheta,
+      theta: posTheta,
+      radius: radiusValue,
+      generation: generationValue || 1,
+      growing: true,
+      age: 0,
+      wanderStep:
+        config.MIN_WANDER_STEP +
+        Math.random() * (config.MAX_WANDER_STEP - config.MIN_WANDER_STEP),
+      growthRate:
+        config.MIN_GROWTH_RATE +
+        Math.random() * (config.MAX_GROWTH_RATE - config.MIN_GROWTH_RATE),
+      shrinkRate:
+        config.MIN_SHRINK_RATE +
+        Math.random() * (config.MAX_SHRINK_RATE - config.MIN_SHRINK_RATE),
+
+      update() {
+        if (element.growing) {
+          element.ox = element.x;
+          element.oy = element.y;
+          element.oTheta = element.theta;
+          element.theta +=
+            -element.wanderStep +
+            Math.random() * (element.wanderStep - -element.wanderStep);
+          element.x +=
+            Math.cos(element.theta) * element.growthRate * element.scale;
+          element.y +=
+            Math.sin(element.theta) * element.growthRate * element.scale;
+          element.scale *= element.shrinkRate;
+          if (
+            fArray.length < config.MAX_CONCURRENT &&
+            Math.random() < config.BRANCH_PROBABILITY
+          ) {
+            let bEl =
+              config.MIN_DIVERGENCE +
+              Math.random() * (config.MAX_DIVERGENCE - config.MIN_DIVERGENCE);
+            bEl = element.theta + bEl * (Math.random() < 0.5 ? 1 : -1);
+            const c = 0.95 * element.scale;
+            const elBase = base(
+              element.x,
+              element.y,
+              bEl,
+              element.radius * c,
+              c,
+              element.generation + 1
+            );
+            fArray.push(elBase);
+          }
+          if (element.radius * element.scale <= config.MIN_RADIUS) {
+            element.growing = false;
+          }
+          element.age++;
+        }
+      },
+
+      render(ctx) {
+        if (element.growing) {
+          const c = element.scale;
+          const d = element.radius * c;
+
+          ctx.save();
+
+          switch (config.RENDER_MODE) {
+            case 'segmented':
+              ctx.beginPath();
+              ctx.moveTo(element.ox, element.oy);
+              ctx.lineTo(element.x, element.y);
+              if (d > 5) {
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+                ctx.shadowBlur = c;
+                ctx.shadowColor = 'rgba(0,0,0,0.05)';
+              }
+              ctx.lineWidth = d + c;
+              ctx.strokeStyle = '#000';
+              ctx.lineCap = 'round';
+              ctx.stroke();
+              ctx.closePath();
+              ctx.beginPath();
+              ctx.moveTo(element.ox, element.oy);
+              ctx.lineTo(element.x, element.y);
+              ctx.lineWidth = d;
+              ctx.strokeStyle = '#FFF';
+              ctx.lineCap = 'round';
+              ctx.stroke();
+              ctx.closePath();
+          }
+
+          ctx.restore();
+        }
+      },
+
+      destroy() {
+        // Not implemented in the original code
+      }
+    };
+
+    return element;
   };
 
-  i.prototype = {
-    update: function () {
-      if (this.growing) {
-        this.ox = this.x;
-        this.oy = this.y;
-        this.oTheta = this.theta;
-        this.theta +=
-          -this.wanderStep +
-          Math.random() * (this.wanderStep - -this.wanderStep);
-        this.x += Math.cos(this.theta) * this.growthRate * this.scale;
-        this.y += Math.sin(this.theta) * this.growthRate * this.scale;
-        this.scale *= this.shrinkRate;
-        if (
-          f.length < a.MAX_CONCURRENT &&
-          Math.random() < a.BRANCH_PROBABILITY
-        ) {
-          var b =
-              a.MIN_DIVERGENCE +
-              Math.random() * (a.MAX_DIVERGENCE - a.MIN_DIVERGENCE),
-            b = this.theta + b * (0.5 > Math.random() ? 1 : -1),
-            c = 0.95 * this.scale,
-            b = new i(this.x, this.y, b, this.radius * c, c);
-          canvasRef.current.getContext('2d').generation = this.generation + 1;
-          f.push(b);
-        }
-        this.radius * this.scale <= a.MIN_RADIUS && (this.growing = !1);
-        this.age++;
+  const init = () => {
+    if (canvasRef.current) {
+      canvasRef.current.width = window.innerWidth;
+      canvasRef.current.height = window.innerHeight;
+      reset();
+      const c = canvasRef.current.width / 2;
+      const j = canvasRef.current.height / 2;
+      for (let n = 0; n < config.NUM_BRANCHES; n++) {
+        const l = (n / config.NUM_BRANCHES) * e;
+        const m = config.MAX_RADIUS;
+        fArray.push(base(c, j, l - b, m, 1, 1));
       }
-    },
-    render: function (b) {
-      if (this.growing) {
-        const c = this.scale;
-        const d = this.radius * c;
-
-        canvasRef.current.getContext('2d').save();
-
-        switch (a.RENDER_MODE) {
-          case 'segmented':
-            canvasRef.current.getContext('2d').beginPath(),
-              canvasRef.current.getContext('2d').moveTo(this.ox, this.oy),
-              canvasRef.current.getContext('2d').lineTo(this.x, this.y),
-              5 < d &&
-                ((canvasRef.current.getContext('2d').shadowOffsetX = 1),
-                (canvasRef.current.getContext('2d').shadowOffsetY = 1),
-                (canvasRef.current.getContext('2d').shadowBlur = c),
-                (canvasRef.current.getContext('2d').shadowColor =
-                  'rgba(0,0,0,0.05)')),
-              (canvasRef.current.getContext('2d').lineWidth = d + c),
-              (canvasRef.current.getContext('2d').strokeStyle = '#000'),
-              (canvasRef.current.getContext('2d').lineCap = 'round'),
-              canvasRef.current.getContext('2d').stroke(),
-              canvasRef.current.getContext('2d').closePath(),
-              canvasRef.current.getContext('2d').beginPath(),
-              canvasRef.current.getContext('2d').moveTo(this.ox, this.oy),
-              canvasRef.current.getContext('2d').lineTo(this.x, this.y),
-              (canvasRef.current.getContext('2d').lineWidth = d),
-              (canvasRef.current.getContext('2d').strokeStyle = '#FFF'),
-              (canvasRef.current.getContext('2d').lineCap = 'round'),
-              canvasRef.current.getContext('2d').stroke(),
-              canvasRef.current.getContext('2d').closePath();
-        }
-
-        canvasRef.current.getContext('2d').restore();
-      }
-    },
-    destroy: function () {
-      canvasRef.current.width = canvasRef.current.width;
+      cX();
     }
   };
 
-  const m = !1,
-    p = canvasRef.current;
-  // n = canvasRef.current.getContext('2d');
-
-  const init = function () {
-    canvasRef.current.width = 1500;
-    canvasRef.current.height = 800;
-    reset();
-    for (
-      var c = canvasRef.current.width / 2,
-        j = canvasRef.current.height / 2,
-        l,
-        m,
-        n = 0;
-      n < a.NUM_BRANCHES;
-      n++
-    )
-      (l = (n / a.NUM_BRANCHES) * e),
-        (m = a.MAX_RADIUS),
-        f.push(new i(c, j, l - b, m));
-
-    cX();
-  };
-
-  const reset = function () {
-    for (let a = 0, b = f.length; a < b; a++) f[a].destroy();
-    f = [];
-  };
-  const clear = function () {
-    canvasRef.current.width = canvasRef.current.width;
+  const reset = () => {
+    for (const element of fArray) {
+      // Implement the destroy function to clean up resources if needed
+      element.destroy();
+    }
+    fArray = [];
   };
 
   const cX = () => {
@@ -163,10 +215,13 @@ export const Canvas = (props: any) => {
 
     let a, b, d;
     a = 0;
-    for (b = f.length; a < b; a++)
-      (d = f[a]), d.update(), d.render(canvasRef.current.getContext('2d'));
-    for (a = f.length - 1; 0 <= a; a--) f[a].growing || f.splice(a, 1);
-    for (a = f.length.toString(); 3 > a.length; ) a = '0' + a;
+    for (b = fArray.length; a < b; a++)
+      (d = fArray[a]),
+        d.update(),
+        d.render(canvasRef.current?.getContext('2d'));
+    for (a = fArray.length - 1; 0 <= a; a--)
+      fArray[a].growing || fArray.splice(a, 1);
+    for (a = fArray.length.toString(); 3 > a.length; ) a = '0' + a;
   };
 
   useEffect(() => {
@@ -177,12 +232,18 @@ export const Canvas = (props: any) => {
       }
       cX();
     }
+
+    const handleWindowResize = () => {
+      init();
+      cX();
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
   }, []);
 
-  // if (canvasRef.current) {
-  //   console.log('entrou');
-  //   init();
-  // }
-
-  return <canvas ref={canvasRef} width={1500} height={800} />;
+  return <canvas ref={canvasRef} />;
 };
