@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-import { Play } from 'lucide-react';
 
 type Props = {
   it: number;
@@ -13,7 +12,7 @@ export function CardModel({ it }: Props) {
   // console.log(it);
 
   return (
-    <li className={`relative h-[10rem] w-full border-b-[0.1rem] animate-fadeIn`}
+    <li className={`relative h-[14rem] w-full border-b-[0.2rem] border-neutral-500 animate-fadeIn`}
     style={
       {
         opacity: 0,
@@ -26,7 +25,7 @@ export function CardModel({ it }: Props) {
             autoPlay={true} loop={false} muted
             style={
                 {
-                  animationDelay: `${(it+1) * 200}ms`,
+                  animationDelay: `${(it+1) * 400}ms`,
                 }
               }
             />
@@ -34,7 +33,7 @@ export function CardModel({ it }: Props) {
         style={
           {
             opacity: 0,
-            animationDelay: `${(it+1) * 100}ms`,
+            animationDelay: `${(it+1) * 300}ms`,
           }
         }
       > 
@@ -42,7 +41,7 @@ export function CardModel({ it }: Props) {
           src={`https://picsum.photos/600/400`}
           alt=""
           fill
-          className={`object-cover opacity-[0.3] hover:opacity-[0.7] cursor-pointer`}
+          className={`object-cover transition-opacity ease-in-out opacity-[0.3] duration-[1s] hover:opacity-[0.7] cursor-pointer`}
           // onLoadingComplete={(img) => imgLoading(img)}
         />
       </button>

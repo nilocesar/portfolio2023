@@ -44,7 +44,7 @@
 }
 
 body{
-  background-image: url('/noise.gif');
+  background-image: url('/noise2.gif');
 }
 
 canvas{
@@ -291,3 +291,9 @@ canvas{
   
 }
 
+.hide{
+  display: none;
+}
+.aside{
+  background-image: url('/texture.gif');
+}

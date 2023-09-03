@@ -3,10 +3,19 @@ import '../styles/globals.css';
 import { Canvas } from '../components/Canvas';
 import { Sidebar } from '../components/Sidebar';
 
+//👇 Import Open Sans font
+import { Raleway } from 'next/font/google'
+
+//👇 Configure our font object
+const ralewayFont = Raleway({
+  subsets: ['latin'],
+  display: 'swap',
+})
+
 export const metadata = {
   title: 'Nilo César',
   description:
-    'Mutável portfólio que reposiciona seus elementos a cada nova visualização.'
+    'Mutável portfólio - reposiciona seus elementos a cada nova visualização.'
 };
 
 type modelScreenObj = {
@@ -49,13 +58,14 @@ export default function RootLayout({
   //const modelSelect = modelScreen[0];
 
   return (
-    <html lang="en">
+    
+    <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
         <Canvas />
         <div
           className={`h-screen flex flex-initial flex-wrap ${modelSelect.base}`}
         >
-          <Sidebar modelSelect={modelSelect.sidebar} />
+          <Sidebar modelSelect={modelSelect.sidebar}/>
           {children}
         </div>
       </body>

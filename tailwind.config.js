@@ -12,6 +12,7 @@ module.exports = {
       animation: {
         fadeIn: 'fadeIn 0.3s ease-in-out forwards',
         fadeOut: 'fadeOut 0.2s ease-in-out forwards',
+        fadeInInit: 'fadeIn 1s ease-in forwards',
       },
 
       // that is actual animation
@@ -27,5 +28,7 @@ module.exports = {
       }),
     },
   },
-  plugins: []
+  plugins: [
+    require("tailwindcss-animation-delay")
+  ]
 };
