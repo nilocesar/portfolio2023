@@ -1,6 +1,6 @@
 // 'use client';
 
-import './styles/globals.css';
+import '../styles/globals.css';
 
 import { Canvas } from '../components/Canvas';
 import { Sidebar } from '../components/Sidebar';
