@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-import useVideoPlayer from 'app/hooks/useVideoPlayer';
+import useVideoPlayer from 'hooks/useVideoPlayer';
 
 
 interface Props {

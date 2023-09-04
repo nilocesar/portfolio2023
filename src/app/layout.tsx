@@ -1,10 +1,14 @@
-import '../styles/globals.css';
+// 'use client';
+
+import './styles/globals.css';
 
 import { Canvas } from '../components/Canvas';
 import { Sidebar } from '../components/Sidebar';
 
 //👇 Import Open Sans font
 import { Raleway } from 'next/font/google'
+// import { usePathname } from 'next/navigation';
+// import { checkIsPublicRoute } from 'functions';
 
 //👇 Configure our font object
 const ralewayFont = Raleway({
@@ -12,11 +16,6 @@ const ralewayFont = Raleway({
   display: 'swap',
 })
 
-export const metadata = {
-  title: 'Nilo César',
-  description:
-    'Mutável portfólio - reposiciona seus elementos a cada nova visualização.'
-};
 
 type modelScreenObj = {
   base: string;
@@ -28,6 +27,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+
   const randomInteger = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };

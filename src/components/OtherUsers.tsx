@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { getUsers } from '../(authenticated)/users/services/get-users';
+import { getUsers } from '../app/(authenticated)/users/services/get-users';
 
 import { User } from 'app/(authenticated)/users/models/user';
 
