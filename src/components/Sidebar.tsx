@@ -15,6 +15,7 @@ export function Sidebar({ modelSelect, className = '' }: Props) {
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [animInit, setAnima] = useState(true);
+  const [animInitSeq, setAnimaSeq] = useState(true);
 
   const readVideo = () => {
 
@@ -31,6 +32,7 @@ export function Sidebar({ modelSelect, className = '' }: Props) {
     handleOnTimeUpdate,
     handleVideoProgress,
     handleVideoSpeed,
+    handleVideoRewind,
   } = useVideoPlayer(videoRef, readVideo);
 
   useEffect(() => {
@@ -49,7 +51,16 @@ export function Sidebar({ modelSelect, className = '' }: Props) {
       <div className={'relative pt-5'}>
         <video ref={videoRef} src="./logo.webm"  muted onTimeUpdate={handleOnTimeUpdate} onClick={()=>{
           setAnima(false);
-          togglePlay();
+          
+          if(animInitSeq){
+            console.log(videoRef.current.currentTime);
+            togglePlay();
+            setAnimaSeq(false);
+          }else{
+            handleVideoRewind();
+            setAnimaSeq(true);
+          }
+
         }}/>
         <p className={`text-stone-500 font-bold my-0.5 opacity-[0] animate-fadeInInit animation-delay-3000`}>
           FRONT END DEVELOPER

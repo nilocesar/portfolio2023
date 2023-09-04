@@ -77,27 +77,32 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement| null >,
     }));
   };
 
-  // const toggleMute = () => {
-  //   setPlayerState((prevState) => ({
-  //     ...prevState,
-  //     isMuted: !prevState.isMuted,
-  //   }));
-  // };
+  const handleVideoRewind = () => {
+    let intervalRewind = setInterval(function(){
+        
+        videoElement.current.playbackRate = 1.0;
 
-  // useEffect(() => {
-  //   if (playerState.isMuted) {
-  //     videoElement.current?.muted = true;
-  //   } else {
-  //     videoElement.current?.muted = false;
-  //   }
-  // }, [playerState.isMuted, videoElement]);
+        // const progress =  (videoElement.current.currentTime / videoElement.current.duration) * 100 || 0;
+        // console.log(videoElement.current.currentTime);
 
+        if(videoElement.current.currentTime < 0.8){
+            clearInterval(intervalRewind);
+            togglePlay();
+        }
+        else{
+          videoElement.current.currentTime += -.1;
+        }
+    },30*2);
+  }
+  
+  
   return {
     playerState,
     togglePlay,
     handleOnTimeUpdate,
     handleVideoProgress,
-    handleVideoSpeed
+    handleVideoSpeed,
+    handleVideoRewind
   };
 };
 
