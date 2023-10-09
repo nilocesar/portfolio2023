@@ -4,6 +4,7 @@ export const checkIsPublicRoute = (asPath:string) => {
     const appPublicRoutes = Object.values(APP_ROUTES.public);
 
 
-    return appPublicRoutes.includes(asPath);
+    // return appPublicRoutes.includes(asPath);
+    return asPath;
 
 };

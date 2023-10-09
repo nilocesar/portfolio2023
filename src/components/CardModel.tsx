@@ -20,8 +20,8 @@ export function CardModel({ it }: Props) {
       }
     }
     >
-      <video src='./spritesheet.webm' 
-            className={`h-[100%] w-full object-cover absolute animate-fadeOut`} 
+      <video src='./spritesheet.webm'
+            className={`h-[100%] w-full object-cover absolute animate-fadeOut`}
             autoPlay={true} loop={false} muted
             style={
                 {
@@ -36,7 +36,7 @@ export function CardModel({ it }: Props) {
             animationDelay: `${(it+1) * 300}ms`,
           }
         }
-      > 
+      >
         <Image
           src={`https://picsum.photos/600/400`}
           alt=""

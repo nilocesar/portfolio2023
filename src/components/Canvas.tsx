@@ -218,7 +218,9 @@ export const Canvas = () => {
     for (b = fArray.length; a < b; a++)
       (d = fArray[a]),
         d.update(),
-        d.render(canvasRef.current?.getContext('2d'));
+        d.render(
+          canvasRef.current?.getContext('2d') as CanvasRenderingContext2D
+        );
     for (a = fArray.length - 1; 0 <= a; a--)
       fArray[a].growing || fArray.splice(a, 1);
     for (a = fArray.length.toString(); 3 > a.length; ) a = '0' + a;

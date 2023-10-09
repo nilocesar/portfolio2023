@@ -14,7 +14,7 @@ interface PlayerState {
   isMuted: boolean;
 }
 
-const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement| null >, readVideo:any ) => {
+const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement >, readVideo:any ) => {
   const [playerState, setPlayerState] = useState<PlayerState>({
     isPlaying: false,
     progress: 0,
@@ -32,15 +32,15 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement| null >,
 
   useReadyEffect(() => {
     readVideo();
-  }, [videoElement]);
+  }, []);
 
-  usePlayingEffect(() => {
-    //executed when video is playing
-  }, [videoElement]);
+  // usePlayingEffect(() => {
+  //   //executed when video is playing
+  // }, [videoElement]);
 
-  useEndEffect(() => {
-    //executed when video is paused
-  }, [videoElement]);
+  // useEndEffect(() => {
+  //   //executed when video is paused
+  // }, [videoElement]);
 
   useEffect(() => {
     if (playerState.isPlaying) {
@@ -51,7 +51,7 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement| null >,
   }, [playerState.isPlaying, videoElement]);
 
   const handleOnTimeUpdate = () => {
-    
+
     const progress =  (videoElement.current.currentTime / videoElement.current.duration) * 100 || 0;
     setPlayerState((prevState) => ({
       ...prevState,
@@ -79,7 +79,7 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement| null >,
 
   const handleVideoRewind = () => {
     let intervalRewind = setInterval(function(){
-        
+
         videoElement.current.playbackRate = 1.0;
 
         // const progress =  (videoElement.current.currentTime / videoElement.current.duration) * 100 || 0;
@@ -92,10 +92,10 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement| null >,
         else{
           videoElement.current.currentTime += -.1;
         }
-    },30*2);
+    },30 * 2);
   }
-  
-  
+
+
   return {
     playerState,
     togglePlay,

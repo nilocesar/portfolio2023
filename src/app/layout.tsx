@@ -59,7 +59,7 @@ export default function RootLayout({
   //const modelSelect = modelScreen[0];
 
   return (
-    
+
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
         <Canvas />
