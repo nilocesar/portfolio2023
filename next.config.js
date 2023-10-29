@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const path = require('path');
+const withSass = require('@zeit/next-sass');
+
+module.exports = {
   images: {
     remotePatterns: [
       {
@@ -8,7 +12,23 @@ const nextConfig = {
       }
     ],
     domains: ['https://picsum.photos/']
+  },
+
+  /* Add Your Scss File Folder Path Here */
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')]
   }
 };
 
-module.exports = nextConfig;
+// module.exports = withSass({
+//   /* bydefault config  option Read For More Optios
+// here https://github.com/vercel/next-plugins/tree/master/packages/next-sass
+// */
+//   cssModules: true
+// });
+// module.exports = {
+//   /* Add Your Scss File Folder Path Here */
+//   sassOptions: {
+//     includePaths: [path.join(__dirname, 'styles')]
+//   }
+// };
