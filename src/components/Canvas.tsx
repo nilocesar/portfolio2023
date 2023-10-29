@@ -45,7 +45,7 @@ interface Config {
 
 export const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [initCanvas, setInitCanvas] = useState(true);
+  let requestId: undefined | number = undefined;
 
   const config: Config = {
     RENDER_MODE: 'segmented',
@@ -187,6 +187,7 @@ export const Canvas = () => {
   };
 
   const init = () => {
+
     if (canvasRef.current) {
       canvasRef.current.width = window.innerWidth;
       canvasRef.current.height = window.innerHeight;
@@ -198,7 +199,13 @@ export const Canvas = () => {
         const m = config.MAX_RADIUS;
         fArray.push(base(c, j, l - b, m, 1, 1));
       }
-      cX();
+
+
+      startLoop();
+      setTimeout(() => {
+        stopLoop();
+      }, 1000 * 3);
+
     }
   };
 
@@ -210,34 +217,41 @@ export const Canvas = () => {
     fArray = [];
   };
 
-  const cX = () => {
-    window.requestAnimationFrame(cX);
+  const loop = () => {
+      requestId = undefined;
 
-    let a, b, d;
-    a = 0;
-    for (b = fArray.length; a < b; a++)
-      (d = fArray[a]),
-        d.update(),
-        d.render(
-          canvasRef.current?.getContext('2d') as CanvasRenderingContext2D
-        );
-    for (a = fArray.length - 1; 0 <= a; a--)
-      fArray[a].growing || fArray.splice(a, 1);
-    for (a = fArray.length.toString(); 3 > a.length; ) a = '0' + a;
+      let a, b, d;
+      a = 0;
+      for (b = fArray.length; a < b; a++)
+        (d = fArray[a]),
+          d.update(),
+          d.render(canvasRef.current?.getContext('2d') as CanvasRenderingContext2D);
+      for (a = fArray.length - 1; 0 <= a; a--) fArray[a].growing || fArray.splice(a, 1);
+      for (a = fArray.length.toString(); 3 > a.length; ) a = '0' + a;
+
+      startLoop();
+  }
+
+  const startLoop = () => {
+    if (!requestId) {
+      requestId = window.requestAnimationFrame(loop);
+    }
   };
+
+  const stopLoop = () => {
+    if (requestId) {
+      window.cancelAnimationFrame(requestId);
+      requestId = undefined;
+    }
+  }
 
   useEffect(() => {
     if (canvasRef.current) {
-      if (initCanvas) {
-        init();
-        setInitCanvas(false);
-      }
-      cX();
+      init();
     }
 
     const handleWindowResize = () => {
-      init();
-      cX();
+      init()
     };
 
     window.addEventListener('resize', handleWindowResize);

@@ -1,11 +1,11 @@
 import { useState, useEffect, MutableRefObject } from "react";
 
-import {
-  useReadyEffect,
-  usePlayingEffect,
-  usePauseEffect,
-  useEndEffect
-} from "video-react-hooks";
+// import {
+//   useReadyEffect,
+//   usePlayingEffect,
+//   usePauseEffect,
+//   useEndEffect
+// } from "video-react-hooks";
 
 interface PlayerState {
   isPlaying: boolean;
@@ -14,7 +14,7 @@ interface PlayerState {
   isMuted: boolean;
 }
 
-const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement >, readVideo:any ) => {
+const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement > ) => {
   const [playerState, setPlayerState] = useState<PlayerState>({
     isPlaying: false,
     progress: 0,
@@ -30,9 +30,9 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement >, readV
     }));
   };
 
-  useReadyEffect(() => {
-    readVideo();
-  }, []);
+  // useReadyEffect(() => {
+  //   readVideo();
+  // }, []);
 
   // usePlayingEffect(() => {
   //   //executed when video is playing
