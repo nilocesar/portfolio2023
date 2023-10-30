@@ -1,20 +1,22 @@
 // 'use client';
 
-import '../styles/globals.css';
+import '../styles/globals.scss';
+import '../styles/sidebar.scss';
 
 import { Canvas } from '../components/Canvas';
 import { Sidebar } from '../components/Sidebar';
 
 //👇 Import Open Sans font
-import { Raleway } from 'next/font/google'
+import { Jura } from 'next/font/google';
 // import { usePathname } from 'next/navigation';
 // import { checkIsPublicRoute } from 'functions';
 
 //👇 Configure our font object
-const ralewayFont = Raleway({
+const ralewayFont = Jura({
   subsets: ['latin'],
-  display: 'swap',
-})
+  // display: 'swap'
+  weight: '700'
+});
 
 
 type modelScreenObj = {
@@ -55,8 +57,8 @@ export default function RootLayout({
     }
   ];
 
-  const modelSelect = modelScreen[model_randow];
-  //const modelSelect = modelScreen[0];
+  //const modelSelect = modelScreen[model_randow];
+  const modelSelect = modelScreen[1];
 
   return (
 

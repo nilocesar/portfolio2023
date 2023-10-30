@@ -38,8 +38,6 @@
     --comment: var(--colors-gray);
     --removed: var(--colors-red);
     --added: var(--colors-turq);
-
-    
   }
 }
 
@@ -72,70 +70,17 @@ canvas{
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color:#64748b80;
-  border-radius: 14px;
-  border: 3px solid var(--colors-black);
-}
+  background-color: rgb(120 113 108 / var(--tw-bg-opacity));
+  border-radius: 20px;
+  border: 5px solid var(--colors-black);
+  // border-top: 4px solid var(--colors-black);
+  // border-bottom: 4px solid var(--colors-black);
+  transition: all 1s ease;
 
-.sidebar{
-  position: relative;
-}
+  &:hover{
+    background-color: lighten(#78716c, 20);
+  }
 
-.sidebar::before{
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-image: url('/sidebar_texture.gif');
-  opacity: 0.7;
-}
-
-.sidebar0::after{
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 16px;
-  bottom: 0;
-  left: 0;
-  background-image: url('/borda2.png');
-  z-index: 11;
-}
-
-.sidebar1::after{
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 16px;
-  top: 0;
-  left: 0;
-  background-image: url('/borda3.png');
-  z-index: 11;
-}
-
-.sidebar2::after{
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 16px;
-  bottom: 0;
-  left: 0;
-  background-image: url('/borda2.png');
-  z-index: 11;
-}
-
-
-
-.sidebar3::after{
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 16px;
-  top: 0;
-  left: 0;
-  background-image: url('/borda3.png');
-  z-index: 11;
 }
 
 .h-full {
@@ -183,30 +128,6 @@ canvas{
 }
 
 @media (min-width: 1024px) {
-
-  .sidebar0::after{
-    position: absolute;
-    content: '';
-    width: 16px;
-    height: 100%;
-    top: 0;
-    right: 0;
-    left: auto;
-    background-image: url('/borda0.png');
-    z-index: 11;
-  }
-  
-  .sidebar1::after{
-    position: absolute;
-    content: '';
-    width: 16px;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: auto;
-    background-image: url('/borda1.png');
-    z-index: 11;
-  }
 
   .lg\:w-\[15rem\] {
     width: 15rem;
@@ -288,12 +209,9 @@ canvas{
   .lg\:h-full {
     height: 100%;
   }
-  
+
 }
 
 .hide{
   display: none;
-}
-.aside{
-  background-image: url('/texture.gif');
 }

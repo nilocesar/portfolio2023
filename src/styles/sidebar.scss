@@ -1,0 +1,142 @@
+.sidebar {
+  position: relative;
+
+  .logoClose {
+    position: relative;
+    width: 163px;
+    height: 50px;
+    overflow: hidden;
+
+    .logo {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      &.close-to-logo {
+        transition: all 0.5s ease-in-out;
+        left: 0;
+      }
+
+      &.logo-to-close {
+        transition: all 0.5s ease-in-out;
+        left: -45px;
+      }
+    }
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url('/sidebar_texture.gif');
+    opacity: 0.7;
+  }
+
+  &.sidebar0 {
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 16px;
+      bottom: 0;
+      left: 0;
+      background-image: url('/borda2.png');
+      z-index: 11;
+    }
+  }
+
+  &.sidebar1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 16px;
+      top: 0;
+      left: 0;
+      background-image: url('/borda3.png');
+      z-index: 11;
+    }
+
+    .logoBase {
+      padding-left: 30px;
+    }
+
+    .about {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 30px;
+
+      .aboutTxt {
+        position: relative;
+        width: fit-content;
+        padding: 2px 60px 2px 5px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.sidebar2 {
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 16px;
+      bottom: 0;
+      left: 0;
+      background-image: url('/borda2.png');
+      z-index: 11;
+    }
+  }
+
+
+
+  &.sidebar3 {
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 16px;
+      top: 0;
+      left: 0;
+      background-image: url('/borda3.png');
+      z-index: 11;
+    }
+  }
+
+  @media (min-width: 1024px) {
+
+    &.sidebar0::after {
+      position: absolute;
+      content: '';
+      width: 16px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      left: auto;
+      background-image: url('/borda0.png');
+      z-index: 11;
+    }
+
+    &.sidebar1::after {
+      position: absolute;
+      content: '';
+      width: 16px;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: auto;
+      background-image: url('/borda1.png');
+      z-index: 11;
+    }
+  }
+
+}
+
