@@ -2,7 +2,7 @@ import { useState, useEffect, MutableRefObject } from "react";
 
 type VideoElement = MutableRefObject<HTMLVideoElement | undefined | null>;
 
-const useSidebar = (videoRef: VideoElement, delayInit:number) => {
+const useSidebar = (videoRef: VideoElement, DELAY_INIT:number) => {
   const [logoStatus, setLogoStatus] = useState<string>('init');
   const [logoAnimate, setLogoAnimate] = useState<string>('close-to-logo');
 
@@ -14,7 +14,7 @@ const useSidebar = (videoRef: VideoElement, delayInit:number) => {
     if (videoRef?.current) {
       setTimeout(() => {
         playInit(videoRef);
-      }, 1000 * (delayInit + 1 ));
+      }, 1000 * (DELAY_INIT + 1 ));
     }
   }, [videoRef]);
 
@@ -38,7 +38,7 @@ const useSidebar = (videoRef: VideoElement, delayInit:number) => {
     const ref = videoRef.current;
 
     if (ref) {
-      let intervalRewind = setInterval(function () {
+      const intervalRewind = setInterval(function () {
         const progress = (ref.currentTime / ref.duration) * 100 || 0;
 
         ref.playbackRate = 1.0;

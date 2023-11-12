@@ -7,10 +7,10 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.photos'
+        hostname: 'picsum.photos',
+        pathname: '**'
       }
-    ],
-    domains: ['https://picsum.photos/']
+    ]
   },
 
   /* Add Your Scss File Folder Path Here */

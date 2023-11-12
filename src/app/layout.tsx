@@ -1,4 +1,3 @@
-// 'use client';
 
 import '../styles/globals.scss';
 import '../styles/sidebar.scss';
@@ -9,12 +8,9 @@ import { Sidebar } from '../components/Sidebar';
 //👇 Import Open Sans font
 import { Jura } from 'next/font/google';
 // import { usePathname } from 'next/navigation';
-// import { checkIsPublicRoute } from 'functions';
-
 //👇 Configure our font object
 const ralewayFont = Jura({
   subsets: ['latin'],
-  // display: 'swap'
   weight: '700'
 });
 
@@ -57,8 +53,8 @@ export default function RootLayout({
     }
   ];
 
-  //const modelSelect = modelScreen[model_randow];
-  const modelSelect = modelScreen[1];
+  const modelSelect = modelScreen[model_randow];
+  //const modelSelect = modelScreen[1];
 
   return (
 

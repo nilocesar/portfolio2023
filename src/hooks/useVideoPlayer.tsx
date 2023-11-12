@@ -1,12 +1,5 @@
 import { useState, useEffect, MutableRefObject } from "react";
 
-// import {
-//   useReadyEffect,
-//   usePlayingEffect,
-//   usePauseEffect,
-//   useEndEffect
-// } from "video-react-hooks";
-
 interface PlayerState {
   isPlaying: boolean;
   progress: number;
@@ -30,17 +23,6 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement > ) => {
     }));
   };
 
-  // useReadyEffect(() => {
-  //   readVideo();
-  // }, []);
-
-  // usePlayingEffect(() => {
-  //   //executed when video is playing
-  // }, [videoElement]);
-
-  // useEndEffect(() => {
-  //   //executed when video is paused
-  // }, [videoElement]);
 
   useEffect(() => {
     if (playerState.isPlaying) {
@@ -78,7 +60,7 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement > ) => {
   };
 
   const handleVideoRewind = () => {
-    let intervalRewind = setInterval(function(){
+    const intervalRewind = setInterval(function(){
 
         videoElement.current.playbackRate = 1.0;
 

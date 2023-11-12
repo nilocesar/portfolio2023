@@ -1,3 +1,5 @@
+export const DELAY_INIT = 2;
+
 export const APP_ROUTES = {
     public:{
         home:{
