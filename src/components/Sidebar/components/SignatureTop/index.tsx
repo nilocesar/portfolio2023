@@ -1,22 +1,15 @@
 'use client';
 
-import React, { useRef, MutableRefObject, useEffect } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import React, { useRef, MutableRefObject } from 'react';
+
+import { motion } from 'framer-motion';
 
 import { DELAY_INIT } from 'utils/constants';
-import { motion } from 'framer-motion';
 
 import useSidebar from '../../hooks/useSidebar';
 
-
-
-interface Props {
-  className?: string;
-}
-
-const SignatureTop = ({ className = '' }: Props) => {
-
-
+const SignatureTop = () => {
   const videoRef = useRef<HTMLVideoElement>();
   const { logoCloseEvent, handleOnTimeUpdate, handleOnEnded, logoAnimate } = useSidebar(
     videoRef,
@@ -64,7 +57,7 @@ const SignatureTop = ({ className = '' }: Props) => {
           src="./logo.webm"
           muted
           onTimeUpdate={() => handleOnTimeUpdate(videoRef)}
-          onEnded={() => handleOnEnded(videoRef)}
+          onEnded={() => handleOnEnded()}
           className={`logo ${logoAnimate}`}
         />
       </motion.div>
@@ -92,6 +85,5 @@ const SignatureTop = ({ className = '' }: Props) => {
     </motion.div>
   );
 };
-
 
 export default SignatureTop;

@@ -1,12 +1,13 @@
-
 import '../styles/globals.scss';
 import '../styles/sidebar.scss';
+
+import { Jura } from 'next/font/google';
+import { ReactNode } from 'react';
 
 import { Canvas } from '../components/Canvas';
 import { Sidebar } from '../components/Sidebar';
 
 //👇 Import Open Sans font
-import { Jura } from 'next/font/google';
 // import { usePathname } from 'next/navigation';
 //👇 Configure our font object
 const ralewayFont = Jura({
@@ -14,19 +15,12 @@ const ralewayFont = Jura({
   weight: '700'
 });
 
-
 type modelScreenObj = {
   base: string;
   sidebar: string;
 };
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
-
-
+export default function RootLayout({ children }: { children: ReactNode }) {
   const randomInteger = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
@@ -57,14 +51,11 @@ export default function RootLayout({
   //const modelSelect = modelScreen[1];
 
   return (
-
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
         <Canvas />
-        <div
-          className={`h-screen flex flex-initial flex-wrap ${modelSelect.base}`}
-        >
-          <Sidebar modelSelect={modelSelect.sidebar}/>
+        <div className={`h-screen flex flex-initial flex-wrap ${modelSelect.base}`}>
+          <Sidebar modelSelect={modelSelect.sidebar} />
           {children}
         </div>
       </body>

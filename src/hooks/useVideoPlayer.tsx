@@ -1,4 +1,4 @@
-import { useState, useEffect, MutableRefObject } from "react";
+import { useState, useEffect, MutableRefObject, ChangeEvent } from 'react';
 
 interface PlayerState {
   isPlaying: boolean;
@@ -7,22 +7,20 @@ interface PlayerState {
   isMuted: boolean;
 }
 
-const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement > ) => {
+const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement>) => {
   const [playerState, setPlayerState] = useState<PlayerState>({
     isPlaying: false,
     progress: 0,
     speed: 1,
-    isMuted: true,
+    isMuted: true
   });
 
   const togglePlay = () => {
-
     setPlayerState((prevState) => ({
       ...prevState,
-      isPlaying: !prevState.isPlaying,
+      isPlaying: !prevState.isPlaying
     }));
   };
-
 
   useEffect(() => {
     if (playerState.isPlaying) {
@@ -33,50 +31,46 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement > ) => {
   }, [playerState.isPlaying, videoElement]);
 
   const handleOnTimeUpdate = () => {
-
-    const progress =  (videoElement.current.currentTime / videoElement.current.duration) * 100 || 0;
+    const progress = (videoElement.current.currentTime / videoElement.current.duration) * 100 || 0;
     setPlayerState((prevState) => ({
       ...prevState,
-      progress,
+      progress
     }));
   };
 
-  const handleVideoProgress = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleVideoProgress = (event: ChangeEvent<HTMLInputElement>) => {
     const manualChange = Number(event.target.value);
     videoElement.current.currentTime = (videoElement.current.duration / 100) * manualChange;
     setPlayerState((prevState) => ({
       ...prevState,
-      progress: manualChange,
+      progress: manualChange
     }));
   };
 
-  const handleVideoSpeed = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleVideoSpeed = (event: ChangeEvent<HTMLInputElement>) => {
     const speed = Number(event.target.value);
     videoElement.current.playbackRate = speed;
     setPlayerState((prevState) => ({
       ...prevState,
-      speed,
+      speed
     }));
   };
 
   const handleVideoRewind = () => {
-    const intervalRewind = setInterval(function(){
+    const intervalRewind = setInterval(function () {
+      videoElement.current.playbackRate = 1.0;
 
-        videoElement.current.playbackRate = 1.0;
+      // const progress =  (videoElement.current.currentTime / videoElement.current.duration) * 100 || 0;
+      // console.log(videoElement.current.currentTime);
 
-        // const progress =  (videoElement.current.currentTime / videoElement.current.duration) * 100 || 0;
-        // console.log(videoElement.current.currentTime);
-
-        if(videoElement.current.currentTime < 0.8){
-            clearInterval(intervalRewind);
-            togglePlay();
-        }
-        else{
-          videoElement.current.currentTime += -.1;
-        }
-    },30 * 2);
-  }
-
+      if (videoElement.current.currentTime < 0.8) {
+        clearInterval(intervalRewind);
+        togglePlay();
+      } else {
+        videoElement.current.currentTime += -0.1;
+      }
+    }, 30 * 2);
+  };
 
   return {
     playerState,

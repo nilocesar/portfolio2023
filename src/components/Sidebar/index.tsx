@@ -1,5 +1,5 @@
-import SignatureTop from './components/SignatureTop';
 import AboutBottom from './components/AboutBottom';
+import SignatureTop from './components/SignatureTop';
 
 interface Props {
   modelSelect: string;
@@ -7,7 +7,6 @@ interface Props {
 }
 
 export function Sidebar({ modelSelect, className = '' }: Props) {
-
   return (
     <aside
       className={`bg-stone-950 bg-opacity-90 ${modelSelect} ${className}

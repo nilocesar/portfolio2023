@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 
 const path = require('path');
@@ -12,9 +13,15 @@ module.exports = {
       }
     ]
   },
-
-  /* Add Your Scss File Folder Path Here */
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
+  },
+  reactStrictMode: true,
+  swcMinify: true,
+  compiler: {
+    styledComponents: true,
+    removeConsole: {
+      exclude: ['error']
+    }
   }
 };

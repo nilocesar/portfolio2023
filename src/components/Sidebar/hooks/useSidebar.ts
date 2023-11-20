@@ -1,28 +1,27 @@
-import { useState, useEffect, MutableRefObject } from "react";
+import { useState, useEffect, MutableRefObject } from 'react';
 
 type VideoElement = MutableRefObject<HTMLVideoElement | undefined | null>;
 
-const useSidebar = (videoRef: VideoElement, DELAY_INIT:number) => {
+const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
   const [logoStatus, setLogoStatus] = useState<string>('init');
   const [logoAnimate, setLogoAnimate] = useState<string>('close-to-logo');
 
   const playInit = (videoRef: VideoElement) => {
     videoRef?.current?.play();
-  }
+  };
 
   useEffect(() => {
     if (videoRef?.current) {
       setTimeout(() => {
         playInit(videoRef);
-      }, 1000 * (DELAY_INIT + 1 ));
+      }, 1000 * (DELAY_INIT + 1));
     }
-  }, [videoRef]);
+  }, [videoRef, DELAY_INIT]);
 
   const handleOnTimeUpdate = (videoRef: VideoElement) => {
-
     const ref = videoRef.current;
 
-    if(ref){
+    if (ref) {
       const progress = (ref.currentTime / ref.duration) * 100 || 0;
 
       if (progress >= 35 && logoStatus === 'init') {
@@ -30,11 +29,9 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT:number) => {
         setLogoStatus('logo');
       }
     }
-
   };
 
   const handleVideoRewind = (videoRef: VideoElement) => {
-
     const ref = videoRef.current;
 
     if (ref) {
@@ -67,7 +64,7 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT:number) => {
     }
   };
 
-  const handleOnEnded = (videoRef: VideoElement) => {
+  const handleOnEnded = () => {
     setLogoStatus('close');
   };
 

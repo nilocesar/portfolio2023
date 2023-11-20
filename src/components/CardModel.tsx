@@ -1,12 +1,13 @@
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 
+import { motion } from 'framer-motion';
 
 type Props = {
   it: number;
 };
 
 export function CardModel({ it }: Props) {
+  console.log(it);
 
   return (
     <motion.li
@@ -32,7 +33,7 @@ export function CardModel({ it }: Props) {
           opacity: 0.8
         }}
         animate={{
-          opacity: 0,
+          opacity: 0
           // display: 'none'
         }}
         transition={{
@@ -46,7 +47,7 @@ export function CardModel({ it }: Props) {
           opacity: 0
         }}
         animate={{
-          opacity: 1,
+          opacity: 1
         }}
         transition={{
           duration: 1,

@@ -2,16 +2,17 @@
 
 // import Link from 'next/link';
 
-import { motion } from 'framer-motion';
 import { BsLinkedin, BsGithub } from 'react-icons/bs';
+
+import { motion } from 'framer-motion';
 
 import { DELAY_INIT } from 'utils/constants';
 
-interface Props {
-  className?: string;
-}
+// interface Props {
+//   className?: string;
+// }
 
-const AboutBottom = ({ className = '' }: Props) => {
+const AboutBottom = () => {
   return (
     <motion.div
       initial={{
