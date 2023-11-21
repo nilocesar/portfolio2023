@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 // import Link from 'next/link';
 import React, { useRef, MutableRefObject } from 'react';
 
@@ -10,8 +12,14 @@ import { DELAY_INIT } from 'utils/constants';
 import useSidebar from '../../hooks/useSidebar';
 
 const SignatureTop = () => {
+  const router = useRouter();
+
+  const callHome = () => {
+    router.push('/');
+  };
+
   const videoRef = useRef<HTMLVideoElement>();
-  const { logoCloseEvent, handleOnTimeUpdate, handleOnEnded, logoAnimate } = useSidebar(
+  const { handleOnTimeUpdate, handleOnEnded, logoAnimate, pageCurrent } = useSidebar(
     videoRef,
     DELAY_INIT
   );
@@ -32,9 +40,11 @@ const SignatureTop = () => {
       className={'logoBase relative pl-5 pt-10'}
     >
       <motion.div
-        className={`logoClose cursor-pointer`}
+        className={`logoClose cursor-pointer ${
+          pageCurrent === 'home' ? 'pointer-events-none' : ''
+        }`}
         onClick={() => {
-          logoCloseEvent(videoRef);
+          callHome();
         }}
         initial={{
           opacity: 0,
@@ -56,7 +66,7 @@ const SignatureTop = () => {
           ref={videoRef as MutableRefObject<HTMLVideoElement>}
           src="./logo.webm"
           muted
-          onTimeUpdate={() => handleOnTimeUpdate(videoRef)}
+          onTimeUpdate={() => handleOnTimeUpdate()}
           onEnded={() => handleOnEnded()}
           className={`logo ${logoAnimate}`}
         />

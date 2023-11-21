@@ -1,7 +1,6 @@
 'use client';
 
-// import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 import { BsLinkedin, BsGithub } from 'react-icons/bs';
 
 import { motion } from 'framer-motion';
@@ -13,6 +12,12 @@ import { DELAY_INIT } from 'utils/constants';
 // }
 
 const AboutBottom = () => {
+  const router = useRouter();
+
+  const callAbout = () => {
+    router.push('/about');
+  };
+
   return (
     <motion.div
       initial={{
@@ -31,7 +36,11 @@ const AboutBottom = () => {
       className={'relative about'}
     >
       <div className="relative w-auto">
-        <button className="bg-stone-500 aboutTxt cursor-pointer hover:bg-stone-800 hover:text-orange-50 text-xl">
+        <button
+          type="button"
+          onClick={() => callAbout()}
+          className="bg-stone-500 aboutTxt cursor-pointer hover:bg-stone-800 hover:text-orange-50 text-xl"
+        >
           ABOUT
         </button>
         <div className="listSocial flex gap-2 pt-2">

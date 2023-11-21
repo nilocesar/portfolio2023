@@ -1,40 +1,54 @@
 import { useState, useEffect, MutableRefObject } from 'react';
 
+import { useAppContext } from 'context';
+
 type VideoElement = MutableRefObject<HTMLVideoElement | undefined | null>;
 
 const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
   const [logoStatus, setLogoStatus] = useState<string>('init');
   const [logoAnimate, setLogoAnimate] = useState<string>('close-to-logo');
 
-  const playInit = (videoRef: VideoElement) => {
-    videoRef?.current?.play();
-  };
+  const { pageCurrent } = useAppContext();
+
+  useEffect(() => {
+    if (logoStatus !== 'init') {
+      if (pageCurrent !== 'home') {
+        videoRef?.current?.play();
+        setLogoAnimate('logo-to-close');
+      } else {
+        handleVideoRewind();
+        setLogoAnimate('close-to-logo');
+      }
+    }
+  }, [pageCurrent]);
 
   useEffect(() => {
     if (videoRef?.current) {
       setTimeout(() => {
-        playInit(videoRef);
+        videoRef?.current?.play();
       }, 1000 * (DELAY_INIT + 1));
     }
   }, [videoRef, DELAY_INIT]);
 
-  const handleOnTimeUpdate = (videoRef: VideoElement) => {
-    const ref = videoRef.current;
-
-    if (ref) {
+  const handleOnTimeUpdate = () => {
+    if (videoRef.current) {
+      const ref = videoRef.current;
       const progress = (ref.currentTime / ref.duration) * 100 || 0;
 
-      if (progress >= 35 && logoStatus === 'init') {
-        ref.pause();
-        setLogoStatus('logo');
+      if (logoStatus === 'init') {
+        if (progress >= 35 && pageCurrent === 'home') {
+          ref.pause();
+          setLogoStatus('logo');
+        } else {
+          if (progress >= 35) setLogoAnimate('logo-to-close');
+        }
       }
     }
   };
 
-  const handleVideoRewind = (videoRef: VideoElement) => {
-    const ref = videoRef.current;
-
-    if (ref) {
+  const handleVideoRewind = () => {
+    if (videoRef.current) {
+      const ref = videoRef.current;
       const intervalRewind = setInterval(function () {
         const progress = (ref.currentTime / ref.duration) * 100 || 0;
 
@@ -52,17 +66,17 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
     }
   };
 
-  const logoCloseEvent = (videoRef: VideoElement) => {
-    if (logoStatus === 'init') {
-      videoRef?.current?.play();
-    } else if (logoStatus === 'logo') {
-      videoRef?.current?.play();
-      setLogoAnimate('logo-to-close');
-    } else {
-      handleVideoRewind(videoRef);
-      setLogoAnimate('close-to-logo');
-    }
-  };
+  // const logoCloseEvent = () => {
+  //   if (logoStatus === 'init') {
+  //     videoRef?.current?.play();
+  //   } else if (logoStatus === 'logo') {
+  //     videoRef?.current?.play();
+  //     setLogoAnimate('logo-to-close');
+  //   } else {
+  //     handleVideoRewind();
+  //     setLogoAnimate('close-to-logo');
+  //   }
+  // };
 
   const handleOnEnded = () => {
     setLogoStatus('close');
@@ -72,8 +86,8 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
     logoStatus,
     logoAnimate,
     handleOnTimeUpdate,
-    logoCloseEvent,
-    handleOnEnded
+    handleOnEnded,
+    pageCurrent
   };
 };
 
