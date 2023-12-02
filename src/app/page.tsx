@@ -1,34 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-
-import { useAppContext } from 'context';
-
 import { CardModel } from '../components/CardModel';
 
+import { useHome } from '../hooks/useHome';
+
 export default function Home() {
-  const [thumbsStatus, setThumbs] = useState(false);
-  const [items, setItems] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
-  const { setPageCurrent, setOriginPage } = useAppContext();
-  setPageCurrent('home');
-  setOriginPage('home');
-
-  useEffect(() => {
-    if (!thumbsStatus)
-      setTimeout(() => {
-        setThumbs(true);
-        const delayedItems: number[] = [];
-        const delay = 1000 * 0.2;
-
-        items.forEach((item, index) => {
-          setTimeout(() => {
-            delayedItems.push(item);
-            setItems([...delayedItems]);
-          }, index * delay);
-        });
-      }, 1000 * 1.2);
-  }, [items, thumbsStatus]);
+  const { thumbsStatus, items } = useHome();
 
   return (
     <main

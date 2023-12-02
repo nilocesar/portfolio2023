@@ -2,12 +2,12 @@
 
 import { ReactNode } from 'react';
 
-import { useAppContext } from 'context';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { useAbout } from '../../hooks/useAbout';
+
 export default function Template({ children }: { children: ReactNode }) {
-  const { originPage, setPageCurrent } = useAppContext();
-  setPageCurrent('about');
+  const { originPage } = useAbout();
 
   return (
     <AnimatePresence mode={'sync'}>
