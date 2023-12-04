@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useAbout } from '../../hooks/useAbout';
 
 export default function Template({ children }: { children: ReactNode }) {
-  const { originPage } = useAbout();
+  const { originPage, borderAnim } = useAbout();
 
   return (
     <AnimatePresence mode={'sync'}>
@@ -18,7 +18,9 @@ export default function Template({ children }: { children: ReactNode }) {
         exit={{ scale: 1, opacity: 1 }}
         transition={{ type: 'Spring', delay: originPage === 'home' ? 1 : 3 }}
       >
-        {children}
+        <motion.div className={`drawBorder ${borderAnim ? 'activeDrawBorder' : ''}`}>
+          {children}
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );
