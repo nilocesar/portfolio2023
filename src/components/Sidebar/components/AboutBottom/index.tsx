@@ -44,12 +44,20 @@ const AboutBottom = () => {
           ABOUT
         </button>
         <div className="listSocial flex gap-2 pt-2">
-          <button className="text-xl text-stone-500 hover:text-orange-50">
+          <a
+            href="https://www.linkedin.com/in/nilo-cesar/"
+            target="_blank"
+            className="text-xl text-stone-500 hover:text-orange-50"
+          >
             <BsLinkedin />
-          </button>
-          <button className="text-xl text-stone-500 hover:text-orange-50">
+          </a>
+          <a
+            href="https://github.com/nilocesar"
+            target="_blank"
+            className="text-xl text-stone-500 hover:text-orange-50"
+          >
             <BsGithub />
-          </button>
+          </a>
         </div>
       </div>
     </motion.div>

@@ -90,7 +90,7 @@ const SignatureTop = () => {
         }}
         className={`text-stone-500 font-bold my-0.5`}
       >
-        FRONT END DEVELOPER
+        FRONT-END
       </motion.p>
     </motion.div>
   );

@@ -1,3 +1,50 @@
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+$spin-time: 5.5s;
+$circle-size: 55vmin;
+$circle-stroke: 65px;
+$displacement: 0%;
+
+@mixin backlight($x, $y, $spread, $size, $colorA, $colorB, $duration) {
+  &:after {
+    position: absolute;
+    content: "";
+    top: $y;
+    left: $x;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    transform: scale($size);
+    -webkit-filter: blur($spread);
+    -moz-filter: blur($spread);
+    -ms-filter: blur($spread);
+    filter: blur($spread);
+    background: linear-gradient(270deg, $colorA, $colorB);
+    background-size: 200% 200%;
+    animation: animateGlow $duration ease infinite;
+
+    @keyframes animateGlow {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+  }
+}
+
 .aboutScreen {
   position: relative;
   display: flex;
@@ -27,7 +74,7 @@
     align-items: center;
     flex: 1;
     transition: color 0.25s;
-    padding: 15rem 0;
+    // padding: 15rem 0;
 
     &::before {
       position: absolute;
@@ -72,7 +119,6 @@
 
   ///
   .profile-card {
-    background: rgb(120 113 108);
     width: 56px;
     height: 56px;
     padding: 20px;
@@ -85,181 +131,268 @@
     margin-top: 70px;
     transform: translate(-50%, -50%);
     border-radius: 4px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
-    animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+    // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+    animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+              moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+              moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+              materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
     border: 1px solid #fff;
 
-    @media (max-width: 1024px) {
-      overflow: hidden;
-      animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
-        moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
-        moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-        materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards,
-        mobile 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;;
-    }
+      &::before{
+        position: absolute;
+        content: 'N';
+        font-size: 3em;
+        line-height: 1;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: moveOut 1s 2.1s ease-in-out forwards;
+      }
 
-    &::before{
-      position: absolute;
-      content: 'N';
-      font-size: 3em;
-      line-height: 1;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      animation: moveOut 1s 2.1s ease forwards;
+      @include backlight(0, 5vw, 5vw, 0.75, #0fffc1, #7e0fff, 10s);
+
     }
 
     .profile-bio {
       position: relative;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0%);
-      color: #333333;
-      text-align: center;
       opacity: 0;
       animation: moveIn 1s 3.1s ease forwards;
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: center;
-      // align-items: center;
-      // padding: 20px;
+      // background-color: rgba(20, 24, 36, 0.9);
+      background-color: rgb(17 17 17 / 80%);
+      padding: 20px;
+      overflow: hidden;
 
-      .avatar{
+      .profile-container{
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 2px;
-        overflow: hidden;
-        border: 5px solid rgba(255, 255, 255, 50%);
+        width: 100%;
+      }
+  }
 
-        img{
-          position: relative;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+  .avatar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    // overflow: hidden;
+    filter: grayscale(10%);
+    border: 0px solid rgba(255, 255, 255, 50%);
+    animation: avatar 1s 3.1s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 
+    img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        @media (min-width: 1024px) {
-          border: 0px solid rgba(255, 255, 255, 50%);
-          animation: avatar 1s 3.1s ease forwards;
-        }
+    .circle {
+      box-sizing: border-box;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: $circle-stroke solid transparent;
+      border-radius: 115% 140% 145% 110%/125% 140% 110% 125%;
+      mix-blend-mode: screen;
+
+      &:nth-child(1) {
+        border-color: #d8cee3;
+        transform-origin: 50%-$displacement 50%;
+        animation: spin1 $spin-time linear infinite;
+      }
+
+      &:nth-child(2) {
+        border-color: #b3b0aa;
+        transform-origin: 50% 50%+$displacement;
+        animation: spin2 $spin-time linear infinite;
+      }
+
+      &:nth-child(3) {
+        border-color: #bfc3ca;
+        transform-origin: 50%+$displacement 50%;
+        animation: spin3 $spin-time linear infinite;
+      }
+
+      &:nth-child(4) {
+        border-color: #7c8983;
+        transform-origin: 50% 50%-$displacement;
+        animation: spin4 $spin-time linear infinite;
       }
     }
   }
+}
 
 
-  @keyframes init {
-    0% {
-      width: 0px;
-      height: 0px;
-    }
 
-    100% {
-      width: 56px;
-      height: 56px;
-      margin-top: 0px;
-      opacity: 1;
-      background-color: transparent;
-    }
+
+@keyframes init {
+  0% {
+    width: 0px;
+    height: 0px;
   }
 
-  @keyframes moveDown {
-    0% {
-      top: 50%;
-    }
+  100% {
+    width: 56px;
+    height: 56px;
+    margin-top: 0px;
+    opacity: 1;
+    background-color: transparent;
+  }
+}
 
-    50% {
-      top: 40%;
-    }
-
-    100% {
-      top: 100%;
-    }
+@keyframes moveDown {
+  0% {
+    top: 50%;
   }
 
-  @keyframes moveUp {
-    0% {
-      background: rgb(120 113 108);
-      top: 100%;
-    }
-
-    50% {
-      top: 40%;
-    }
-
-    100% {
-      top: 50%;
-      background: #E0E0E0;
-    }
+  50% {
+    top: 40%;
   }
 
-  @keyframes materia_landscape {
-    0% {
-      background: #E0E0E0;
-    }
+  100% {
+    top: 100%;
+  }
+}
 
-    100% {
-      width: 80%;
-      height: auto;
-      max-height: 80%;
-      // min-height: 50%;
-      background: transparent;
-      border-color: rgba(255, 255, 255, 50%);
-    }
+@keyframes moveUp {
+  0% {
+    background: rgb(120 113 108);
+    top: 100%;
   }
 
-  @keyframes mobile {
-    0% {
-      overflow: hidden;
-    }
-
-    100% {
-      overflow-y: auto;
-    }
+  50% {
+    top: 40%;
   }
 
-  @keyframes moveIn {
-    0% {
-      opacity: 0;
-    }
+  100% {
+    top: 50%;
+    background: #E0E0E0;
+  }
+}
 
-    100% {
-      opacity: 1;
-    }
+@keyframes materia_landscape {
+  0% {
+    background: #E0E0E0;
   }
 
-  @keyframes moveOut {
-    0% {
-      opacity: 1;
-    }
+  100% {
+    width: 80%;
+    height: 80%;
+    // max-height: 90%;
+    // min-height: 50%;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 10%);
+    // overflow: hidden;
+    // overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0%);
+    // position: relative;
+    // top: 0;
+    // left: 0;
+    // transform: none;
+  }
+}
 
-    100% {
-      opacity: 0;
-    }
+
+@keyframes moveIn {
+  0% {
+    opacity: 0;
   }
 
-  @keyframes avatar {
-    0% {
-      position: absolute;
-      left: 50%;
-      margin-left: -4rem;
-      top: -15rem;
-      border: 1px solid rgba(255, 255, 255, 0%);
-    }
+  100% {
+    opacity: 1;
+    overflow-y: auto;
+  }
+}
 
-    100% {
-      position: absolute;
-      left: 50%;
-      margin-left: -4rem;
-      top: -5.1rem;
-      border: 10px solid rgba(255, 255, 255, 50%);
-    }
+@keyframes moveOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes avatar {
+  0% {
+    position: relative;
+    // left: 50%;
+    // margin-left: -4rem;
+    // top: -15rem;
+    // border: 1px solid rgba(255, 255, 255, 0%);
+    filter: grayscale(100%);
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    position: relative;
+    // left: 50%;
+    // margin-left: -4rem;
+    // top: -5.1rem;
+    // border: 10px solid rgba(255, 255, 255, 50%);
+    filter: grayscale(10%);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+
+@keyframes spin1 {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: rotate(72deg);
+  }
+
+  100% {
+    transform: rotate(-288deg);
+  }
+}
+
+@keyframes spin3 {
+  0% {
+    transform: rotate(-144deg);
+  }
+
+  100% {
+    transform: rotate(216deg);
+  }
+}
+
+@keyframes spin4 {
+  0% {
+    transform: rotate(216deg);
+  }
+
+  100% {
+    transform: rotate(-144deg);
   }
 }
