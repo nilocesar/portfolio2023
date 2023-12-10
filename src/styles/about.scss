@@ -27,6 +27,7 @@
     align-items: center;
     flex: 1;
     transition: color 0.25s;
+    padding: 15rem 0;
 
     &::before {
       position: absolute;
@@ -74,18 +75,28 @@
     background: rgb(120 113 108);
     width: 56px;
     height: 56px;
+    padding: 20px;
     position: absolute;
     left: 50%;
     top: 50%;
     z-index: 2;
-    overflow: hidden;
+    // overflow: hidden;
     opacity: 0;
     margin-top: 70px;
     transform: translate(-50%, -50%);
     border-radius: 4px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
     animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+    border: 1px solid #fff;
 
+    @media (max-width: 1024px) {
+      overflow: hidden;
+      animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+        moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+        moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards,
+        mobile 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;;
+    }
 
     &::before{
       position: absolute;
@@ -100,13 +111,14 @@
       height: 100%;
       top: 0;
       left: 0;
+      animation: moveOut 1s 2.1s ease forwards;
     }
 
     .profile-bio {
       position: relative;
       width: 100%;
       height: 100%;
-      // background: #FFFFFF;
+      background: rgba(255, 255, 255, 0%);
       color: #333333;
       text-align: center;
       opacity: 0;
@@ -115,7 +127,30 @@
       // flex-direction: column;
       // justify-content: center;
       // align-items: center;
-      padding: 20px;
+      // padding: 20px;
+
+      .avatar{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2px;
+        overflow: hidden;
+        border: 5px solid rgba(255, 255, 255, 50%);
+
+        img{
+          position: relative;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+
+        @media (min-width: 1024px) {
+          border: 0px solid rgba(255, 255, 255, 50%);
+          animation: avatar 1s 3.1s ease forwards;
+        }
+      }
     }
   }
 
@@ -131,6 +166,7 @@
       height: 56px;
       margin-top: 0px;
       opacity: 1;
+      background-color: transparent;
     }
   }
 
@@ -174,7 +210,17 @@
       height: auto;
       max-height: 80%;
       // min-height: 50%;
-      background: #fff;
+      background: transparent;
+      border-color: rgba(255, 255, 255, 50%);
+    }
+  }
+
+  @keyframes mobile {
+    0% {
+      overflow: hidden;
+    }
+
+    100% {
       overflow-y: auto;
     }
   }
@@ -186,6 +232,34 @@
 
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes moveOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes avatar {
+    0% {
+      position: absolute;
+      left: 50%;
+      margin-left: -4rem;
+      top: -15rem;
+      border: 1px solid rgba(255, 255, 255, 0%);
+    }
+
+    100% {
+      position: absolute;
+      left: 50%;
+      margin-left: -4rem;
+      top: -5.1rem;
+      border: 10px solid rgba(255, 255, 255, 50%);
     }
   }
 }
