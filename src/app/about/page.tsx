@@ -4,9 +4,7 @@ import Image from 'next/image';
 
 import { useAbout } from '../../hooks/useAbout';
 
-
 const About = () => {
-
   const { borderAnim } = useAbout();
 
   return (

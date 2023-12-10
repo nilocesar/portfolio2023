@@ -1,11 +1,9 @@
 'use client';
 
 import { CardModel } from '../components/CardModel';
-
 import { useHome } from '../hooks/useHome';
 
 export default function Home() {
-
   const { thumbsStatus, items } = useHome();
 
   return (
