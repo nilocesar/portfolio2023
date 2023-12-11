@@ -12,7 +12,7 @@ const About = () => {
       {borderAnim && (
         <>
           <aside className="profile-card shadow-md">
-            <div className="profile-bio mx-auto rounded-lg p-2">
+            <div className="profile-bio mx-auto rounded-lg p-2 flex flex-1 flex-col">
               <div className={'w-32 h-32 rounded-full mx-auto avatar'}>
                 <div className="circle"></div>
                 <div className="circle"></div>
@@ -26,10 +26,10 @@ const About = () => {
                   height={100}
                 />
               </div>
-              <div className={'profile-container'}>
+              <div className={'profile-container flex flex-1 flex-col justify-center items-center'}>
                 <h2 className="text-center text-2xl font-semibold mt-3 text-white">Nilo César</h2>
                 <p className="text-center text-stone-500 mt-1">FRONT-END</p>
-                <div className="flex justify-center mt-5 border-white border-b pb-4">
+                <div className="flex justify-center mt-5 border-white border-b pb-4 w-full">
                   <a
                     href="https://www.linkedin.com/in/nilo-cesar/"
                     target="_blank"

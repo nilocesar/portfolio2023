@@ -21,7 +21,7 @@ export function CardModel({ it }: Props) {
         duration: 0.5,
         ease: 'easeIn'
       }}
-      className={`relative h-[14rem] w-full border-b-[0.2rem] border-neutral-500 block`}
+      className={`relative h-[7rem] sm:h-[14rem] w-full border-b-[0.2rem] border-neutral-500 block`}
     >
       <motion.video
         src="./spritesheet.webm"

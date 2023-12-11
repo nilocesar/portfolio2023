@@ -119,24 +119,33 @@ $displacement: 0%;
 
   ///
   .profile-card {
-    width: 56px;
-    height: 56px;
-    padding: 20px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 2;
-    // overflow: hidden;
-    opacity: 0;
-    margin-top: 70px;
-    transform: translate(-50%, -50%);
-    border-radius: 4px;
-    // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
-    animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
-              moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
-              moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-              materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
-    border: 1px solid #fff;
+      width: 56px;
+      height: 56px;
+      padding: 20px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 2;
+      // overflow: hidden;
+      opacity: 0;
+      margin-top: 70px;
+      transform: translate(-50%, -50%);
+      border-radius: 4px;
+      border: 1px solid #fff;
+
+      animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+                moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+                moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+                finish 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+
+      @media (max-width: 1024px) {
+        animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+            moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+            moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+            finish_mobile 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+      }
+
+
 
       &::before{
         position: absolute;
@@ -277,7 +286,7 @@ $displacement: 0%;
   }
 }
 
-@keyframes materia_landscape {
+@keyframes finish {
   0% {
     background: #E0E0E0;
   }
@@ -285,17 +294,24 @@ $displacement: 0%;
   100% {
     width: 80%;
     height: 80%;
-    // max-height: 90%;
-    // min-height: 50%;
     background: transparent;
     border-color: rgba(255, 255, 255, 10%);
-    // overflow: hidden;
-    // overflow-y: auto;
     background-color: rgba(255, 255, 255, 0%);
-    // position: relative;
-    // top: 0;
-    // left: 0;
-    // transform: none;
+  }
+}
+
+@keyframes finish_mobile {
+  0% {
+    background: #E0E0E0;
+  }
+
+  100% {
+    width: 95%;
+    height: 95%;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 10%);
+    background-color: rgba(255, 255, 255, 0%);
+    padding: 10px;
   }
 }
 
