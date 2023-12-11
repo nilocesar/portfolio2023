@@ -48,6 +48,7 @@ const AboutBottom = () => {
             href="https://www.linkedin.com/in/nilo-cesar/"
             target="_blank"
             className="text-xl text-stone-500 hover:text-orange-50"
+            rel="noreferrer"
           >
             <BsLinkedin />
           </a>
@@ -55,6 +56,7 @@ const AboutBottom = () => {
             href="https://github.com/nilocesar"
             target="_blank"
             className="text-xl text-stone-500 hover:text-orange-50"
+            rel="noreferrer"
           >
             <BsGithub />
           </a>

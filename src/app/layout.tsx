@@ -2,7 +2,6 @@ import '../styles/globals.scss';
 import '../styles/sidebar.scss';
 
 import type { Metadata } from 'next';
-
 import { Jura } from 'next/font/google';
 import { ReactNode } from 'react';
 

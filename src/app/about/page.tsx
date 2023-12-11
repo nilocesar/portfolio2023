@@ -34,6 +34,7 @@ const About = () => {
                     href="https://www.linkedin.com/in/nilo-cesar/"
                     target="_blank"
                     className="text-sky-50 hover:text-stone-500 mx-3"
+                    rel="noreferrer"
                   >
                     LinkedIn
                   </a>
@@ -41,6 +42,7 @@ const About = () => {
                     href="https://github.com/nilocesar"
                     target="_blank"
                     className="text-sky-50 hover:text-stone-500 mx-3"
+                    rel="noreferrer"
                   >
                     GitHub
                   </a>
