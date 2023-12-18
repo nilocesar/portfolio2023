@@ -39,7 +39,7 @@ const AboutBottom = () => {
         <button
           type="button"
           onClick={() => callAbout()}
-          className="bg-stone-500 aboutTxt cursor-pointer hover:bg-stone-800 hover:text-orange-50 text-xl"
+          className="bg-amber-50 aboutTxt cursor-pointer hover:bg-amber-200 text-xl"
         >
           ABOUT
         </button>
@@ -47,7 +47,7 @@ const AboutBottom = () => {
           <a
             href="https://www.linkedin.com/in/nilo-cesar/"
             target="_blank"
-            className="text-xl text-stone-500 hover:text-orange-50"
+            className="text-xl text-amber-50 hover:text-amber-200"
             rel="noreferrer"
           >
             <BsLinkedin />
@@ -55,7 +55,7 @@ const AboutBottom = () => {
           <a
             href="https://github.com/nilocesar"
             target="_blank"
-            className="text-xl text-stone-500 hover:text-orange-50"
+            className="text-xl text-amber-50 hover:text-amber-200"
             rel="noreferrer"
           >
             <BsGithub />

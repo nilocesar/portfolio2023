@@ -70,7 +70,7 @@ canvas{
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgb(120 113 108 / var(--tw-bg-opacity));
+  background-color: rgb(255 251 235);
   border-radius: 20px;
   border: 5px solid var(--colors-black);
   // border-top: 4px solid var(--colors-black);
@@ -78,7 +78,7 @@ canvas{
   transition: all 1s ease;
 
   &:hover{
-    background-color: lighten(#78716c, 20);
+    background-color: rgb(254 243 199);
   }
 
 }

@@ -88,7 +88,7 @@ const SignatureTop = () => {
           ease: 'easeOut',
           delay: DELAY_INIT + 1
         }}
-        className={`text-stone-500 font-bold my-0.5`}
+        className={`text-amber-50 font-bold my-0.5`}
       >
         FRONT-END
       </motion.p>
