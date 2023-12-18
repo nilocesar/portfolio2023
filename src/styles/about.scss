@@ -6,7 +6,7 @@
 
 $spin-time: 5.5s;
 $circle-size: 55vmin;
-$circle-stroke: 65px;
+$circle-stroke: 4.4em;
 $displacement: 0%;
 
 @mixin backlight($x, $y, $spread, $size, $colorA, $colorB, $duration) {
@@ -213,25 +213,25 @@ $displacement: 0%;
       mix-blend-mode: screen;
 
       &:nth-child(1) {
-        border-color: #d8cee3;
+        border-color: #FEDC97;
         transform-origin: 50%-$displacement 50%;
         animation: spin1 $spin-time linear infinite;
       }
 
       &:nth-child(2) {
-        border-color: #b3b0aa;
+        border-color: rgb(244, 209, 119);
         transform-origin: 50% 50%+$displacement;
         animation: spin2 $spin-time linear infinite;
       }
 
       &:nth-child(3) {
-        border-color: #bfc3ca;
+        border-color: rgb(251 191 36);
         transform-origin: 50%+$displacement 50%;
         animation: spin3 $spin-time linear infinite;
       }
 
       &:nth-child(4) {
-        border-color: #7c8983;
+        border-color: rgb(255 251 235);
         transform-origin: 50% 50%-$displacement;
         animation: spin4 $spin-time linear infinite;
       }
