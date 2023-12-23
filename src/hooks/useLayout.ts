@@ -33,5 +33,5 @@ export const useLayout = () => {
   const modelSelect = modelScreen[model_randow];
   //const modelSelect = modelScreen[1];
 
-  return { modelSelect };
+  return { modelSelect, sb_w_randow };
 };

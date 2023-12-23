@@ -23,7 +23,7 @@ const ralewayFont = Jura({
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const { modelSelect } = useLayout();
+  const { modelSelect, sb_w_randow } = useLayout();
 
   return (
     <html lang="en" className={ralewayFont.className}>
@@ -31,6 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AppWrapper>
           <Canvas />
           <div className={`h-screen flex flex-initial flex-wrap ${modelSelect.base}`}>
+            <h1>{sb_w_randow}</h1>
             <Sidebar modelSelect={modelSelect.sidebar} />
             {children}
           </div>

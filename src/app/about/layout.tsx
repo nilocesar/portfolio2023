@@ -1,31 +1,14 @@
-'use client';
-
 import '../../styles/about.scss';
 
+import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
-import { AnimatePresence, motion } from 'framer-motion';
-
-import { useAbout } from '../../hooks/useAbout';
+export const metadata: Metadata = {
+  title: 'Sobre: Nilo César',
+  description:
+    'Sou um desenvolvedor front-end, empenhado em criar experiências digitais notáveis. Minhas habilidades especializadas em HTML, CSS e JavaScript, aliadas ao domínio dos seus principais frameworks, me capacitam a transformar conceitos criativos em interfaces de usuário envolventes e impactantes.'
+};
 
 export default function AboutLayout({ children }: { children: ReactNode }) {
-  const { originPage, borderAnim } = useAbout();
-
-  return (
-    <div className="flex-1 overflow-hidden w-full h-full">
-      <AnimatePresence mode={'sync'}>
-        <motion.div
-          className="aboutScreen"
-          initial={{ scale: 0.85, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 1, opacity: 1 }}
-          transition={{ type: 'Spring', delay: originPage === 'home' ? 1 : 3 }}
-        >
-          <motion.div className={`drawBorder ${borderAnim ? 'activeDrawBorder' : ''}`}>
-            {children}
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
+  return <div className="flex-1 overflow-hidden w-full h-full">{children}</div>;
 }
