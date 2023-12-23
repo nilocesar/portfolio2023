@@ -1,9 +1,13 @@
+import { useState, useEffect } from 'react';
+
 type modelScreenObj = {
   base: string;
   sidebar: string;
 };
 
 export const useLayout = () => {
+  const [modelSelect, setModelSelect] = useState<any>(null);
+
   const randomInteger = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
@@ -30,8 +34,10 @@ export const useLayout = () => {
     }
   ];
 
-  const modelSelect = modelScreen[model_randow];
-  //const modelSelect = modelScreen[1];
+  useEffect(() => {
+    setModelSelect(modelScreen[model_randow]);
+    //const modelSelect = modelScreen[1];
+  }, []);
 
-  return { modelSelect, sb_w_randow };
+  return { modelSelect };
 };

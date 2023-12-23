@@ -5,7 +5,7 @@ import '../styles/sidebar.scss';
 
 // import type { Metadata } from 'next';
 import { Jura } from 'next/font/google';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import { AppWrapper } from 'context';
 
@@ -27,22 +27,17 @@ const ralewayFont = Jura({
 export default function RootLayout({ children }: { children: ReactNode }) {
   const { modelSelect } = useLayout();
 
-  const randomInteger = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-  // const sb_w_randow = randomInteger(17, 35);
-
-  const [stado] = useState(randomInteger(17, 35));
-
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
         <AppWrapper>
           <Canvas />
-          <div className={`h-screen flex flex-initial flex-wrap ${modelSelect.base}`}>
-            <h1>stado : {stado}</h1>
-
-            <Sidebar modelSelect={modelSelect.sidebar} />
+          <div
+            className={`h-screen flex flex-initial flex-wrap ${
+              modelSelect ? modelSelect.base : ''
+            }`}
+          >
+            <Sidebar modelSelect={modelSelect ? modelSelect.sidebar : ''} />
             {children}
           </div>
         </AppWrapper>
