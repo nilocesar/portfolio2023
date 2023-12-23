@@ -28,14 +28,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
-        <AppWrapper>
-          <Canvas />
-          <div className={`h-screen flex flex-initial flex-wrap ${modelSelect.base}`}>
-            <h1>{sb_w_randow}</h1>
+        <Canvas />
+        <div className={`h-screen flex flex-initial flex-wrap ${modelSelect.base}`}>
+          <h1>{sb_w_randow}</h1>
+          <AppWrapper>
             <Sidebar modelSelect={modelSelect.sidebar} />
             {children}
-          </div>
-        </AppWrapper>
+          </AppWrapper>
+        </div>
       </body>
     </html>
   );
