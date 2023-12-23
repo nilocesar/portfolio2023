@@ -23,14 +23,19 @@ const ralewayFont = Jura({
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const { modelSelect, sb_w_randow } = useLayout();
+  const { modelSelect } = useLayout();
+
+  const randomInteger = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+  const sb_w_randow = randomInteger(17, 35);
 
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
         <Canvas />
         <div className={`h-screen flex flex-initial flex-wrap ${modelSelect.base}`}>
-          <h1>Teste: {sb_w_randow}</h1>
+          <h1>TesteKKKKK : {sb_w_randow}</h1>
           <AppWrapper>
             <Sidebar modelSelect={modelSelect.sidebar} />
             {children}
