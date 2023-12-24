@@ -41,6 +41,30 @@
   }
 }
 
+@media (max-width: 900px) {
+
+  html,
+  body {
+    height: 100% !important;
+    overflow-y: scroll !important;
+  }
+
+  html main,
+  body main {
+    height: 100% !important;
+    position: relative !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  body main {
+    position: relative !important;
+    transition: none !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
 body{
   background-image: url('/noise2.gif');
 }

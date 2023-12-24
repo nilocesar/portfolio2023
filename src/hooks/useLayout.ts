@@ -1,3 +1,4 @@
+import { Sidebar } from 'components/Sidebar';
 import { useState, useEffect } from 'react';
 
 type modelScreenObj = {
@@ -6,7 +7,7 @@ type modelScreenObj = {
 };
 
 export const useLayout = () => {
-  const [modelSelect, setModelSelect] = useState<any>(null);
+  const [modelSelect, setModelSelect] = useState({base:'', sidebar:''});
 
   const randomInteger = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -34,10 +35,12 @@ export const useLayout = () => {
     }
   ];
 
-  useEffect(() => {
-    setModelSelect(modelScreen[model_randow]);
-    //const modelSelect = modelScreen[1];
-  }, []);
+  // useEffect(() => {
+  //   alert(model_randow)
+  //   // setModelSelect(modelScreen[model_randow]);
+  //   //const modelSelect = modelScreen[1];
+  // }, []);
 
-  return { modelSelect };
+
+  return { modelSelect:modelScreen[1] };
 };

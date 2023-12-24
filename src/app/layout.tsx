@@ -32,14 +32,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="bg-white">
         <AppWrapper>
           <Canvas />
-          <div
+          <main
             className={`h-screen flex flex-initial flex-wrap ${
               modelSelect ? modelSelect.base : ''
             }`}
           >
             <Sidebar modelSelect={modelSelect ? modelSelect.sidebar : ''} />
             {children}
-          </div>
+          </main>
         </AppWrapper>
       </body>
     </html>

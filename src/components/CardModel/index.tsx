@@ -1,13 +1,17 @@
 import Image from 'next/image';
 
+import { isIOS } from 'react-device-detect';
+
 import { motion } from 'framer-motion';
+
+
 
 type Props = {
   it: number;
 };
 
 export function CardModel({ it }: Props) {
-  console.log(it);
+
 
   return (
     <motion.li
@@ -23,25 +27,35 @@ export function CardModel({ it }: Props) {
       }}
       className={`relative h-[7rem] sm:h-[14rem] w-full border-b-[0.2rem] border-neutral-500 block`}
     >
-      <motion.video
-        src="./spritesheet.webm"
-        className={`h-[100%] w-full object-cover absolute`}
-        autoPlay={true}
-        loop={false}
-        muted
-        initial={{
-          opacity: 0.8
-        }}
-        animate={{
-          opacity: 0
-          // display: 'none'
-        }}
-        transition={{
-          duration: 0.3,
-          ease: 'easeInOut',
-          delay: 1.6
-        }}
-      />
+      {isIOS ? (
+        <Image
+          src={"/image/spritesheet2.png"}
+          alt=""
+          fill
+          className={`h-[100%] w-full object-cover absolute`}
+        />
+      ) : (
+        <motion.video
+          src="./spritesheet.webm"
+          className={`h-[100%] w-full object-cover absolute`}
+          autoPlay={true}
+          loop={false}
+          muted
+          initial={{
+            opacity: 0.8
+          }}
+          animate={{
+            opacity: 0
+            // display: 'none'
+          }}
+          transition={{
+            duration: 0.3,
+            ease: 'easeInOut',
+            delay: 1.6
+          }}
+        />
+      )}
+
       <motion.button
         initial={{
           opacity: 0

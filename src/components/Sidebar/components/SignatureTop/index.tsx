@@ -1,9 +1,12 @@
 'use client';
 
+import React, { useRef, MutableRefObject } from 'react';
+
+import { isIOS } from 'react-device-detect';
+
 import { useRouter } from 'next/navigation';
 
-// import Link from 'next/link';
-import React, { useRef, MutableRefObject } from 'react';
+import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
@@ -11,7 +14,11 @@ import { DELAY_INIT } from 'utils/constants';
 
 import useSidebar from '../../hooks/useSidebar';
 
+
+
 const SignatureTop = () => {
+
+
   const router = useRouter();
 
   const callHome = () => {
@@ -62,14 +69,33 @@ const SignatureTop = () => {
           delay: DELAY_INIT + 1
         }}
       >
-        <video
-          ref={videoRef as MutableRefObject<HTMLVideoElement>}
-          src="./logo.webm"
-          muted
-          onTimeUpdate={() => handleOnTimeUpdate()}
-          onEnded={() => handleOnEnded()}
-          className={`logo ${logoAnimate}`}
-        />
+        {isIOS ? (
+
+          pageCurrent === 'home' ? (
+            <Image
+              src={`/image/logo.png`}
+              alt=""
+              fill
+              className={`cursor-pointer object-contain object-left-top animate-fadeIn`}
+            />
+          ) : (
+            <Image
+              src={`/image/close.png`}
+              alt=""
+              fill
+              className={`cursor-pointer object-contain object-left-top animate-fadeIn`}
+            />
+          )
+        ) : (
+          <video
+            ref={videoRef as MutableRefObject<HTMLVideoElement>}
+            src="./logo.webm"
+            muted
+            onTimeUpdate={() => handleOnTimeUpdate()}
+            onEnded={() => handleOnEnded()}
+            className={`logo ${logoAnimate}`}
+          />
+        )}
       </motion.div>
 
       <motion.p

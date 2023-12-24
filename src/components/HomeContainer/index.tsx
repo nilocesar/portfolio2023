@@ -8,7 +8,7 @@ export default function HomeContainer() {
   const { thumbsStatus, items } = useHome();
 
   return (
-    <main
+    <div
       className={`flex-1 max-h-screen overflow-y-scroll relative ${!thumbsStatus ? 'hide' : ''}`}
     >
       {thumbsStatus && (
@@ -18,6 +18,6 @@ export default function HomeContainer() {
           })}
         </ul>
       )}
-    </main>
+    </div>
   );
 }
