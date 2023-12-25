@@ -1,23 +1,18 @@
 'use client';
 
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useRef, MutableRefObject } from 'react';
 
-import { isIOS } from 'react-device-detect';
-
-import { useRouter } from 'next/navigation';
-
-import Image from 'next/image';
-
 import { motion } from 'framer-motion';
+import { useDevice } from 'hooks/useDevice';
 
 import { DELAY_INIT } from 'utils/constants';
 
 import useSidebar from '../../hooks/useSidebar';
 
-
-
 const SignatureTop = () => {
-
+  const { isIOS } = useDevice();
 
   const router = useRouter();
 
@@ -70,20 +65,19 @@ const SignatureTop = () => {
         }}
       >
         {isIOS ? (
-
           pageCurrent === 'home' ? (
             <Image
               src={`/image/logo.png`}
               alt=""
               fill
-              className={`cursor-pointer object-contain object-left-top animate-fadeIn`}
+              className={`cursor-pointer object-contain object-left-top animate-fadeInInit`}
             />
           ) : (
             <Image
               src={`/image/close.png`}
               alt=""
               fill
-              className={`cursor-pointer object-contain object-left-top animate-fadeIn`}
+              className={`cursor-pointer object-contain object-left-top animate-fadeInInit`}
             />
           )
         ) : (

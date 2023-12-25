@@ -1,17 +1,17 @@
+'use client';
+
 import Image from 'next/image';
 
-import { isIOS } from 'react-device-detect';
-
 import { motion } from 'framer-motion';
-
-
+import { useDevice } from 'hooks/useDevice';
 
 type Props = {
   it: number;
 };
 
 export function CardModel({ it }: Props) {
-
+  const { isIOS } = useDevice();
+  console.log(it);
 
   return (
     <motion.li
@@ -29,7 +29,7 @@ export function CardModel({ it }: Props) {
     >
       {isIOS ? (
         <Image
-          src={"/image/spritesheet2.png"}
+          src={'/image/spritesheet2.png'}
           alt=""
           fill
           className={`h-[100%] w-full object-cover absolute`}
