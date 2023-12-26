@@ -8,10 +8,10 @@ import { Jura } from 'next/font/google';
 import { ReactNode } from 'react';
 
 import { AppWrapper } from 'context';
+import { useAppContext } from 'context';
 
-import { Canvas } from '../components/Canvas';
-import { Sidebar } from '../components/Sidebar';
-import { useLayout } from '../hooks/useLayout';
+import { Canvas } from 'components/Canvas';
+import { Sidebar } from 'components/Sidebar';
 
 // export const metadata: Metadata = {
 //   title: 'Nilo César',
@@ -25,21 +25,27 @@ const ralewayFont = Jura({
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const { modelSelect } = useLayout();
+  const Main = () => {
+    const { modelSelect } = useAppContext();
+
+    return (
+      <>
+        <main
+          className={`h-screen flex flex-initial flex-wrap ${modelSelect ? modelSelect.base : ''}`}
+        >
+          <Sidebar modelSelect={modelSelect ? modelSelect.sidebar : ''} />
+          {children}
+        </main>
+      </>
+    );
+  };
 
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
         <AppWrapper>
           <Canvas />
-          <main
-            className={`h-screen flex flex-initial flex-wrap ${
-              modelSelect ? modelSelect.base : ''
-            }`}
-          >
-            <Sidebar modelSelect={modelSelect ? modelSelect.sidebar : ''} />
-            {children}
-          </main>
+          <Main />
         </AppWrapper>
       </body>
     </html>
