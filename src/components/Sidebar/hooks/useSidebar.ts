@@ -1,6 +1,7 @@
 import { useState, useEffect, MutableRefObject } from 'react';
 
 import { useAppContext } from 'context';
+import { useStore } from 'store';
 
 type VideoElement = MutableRefObject<HTMLVideoElement | undefined | null>;
 
@@ -8,9 +9,14 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
   const [logoStatus, setLogoStatus] = useState<string>('init');
   const [logoAnimate, setLogoAnimate] = useState<string>('close-to-logo');
 
-  const { pageCurrent } = useAppContext();
+  // const { pageCurrent } = useAppContext();
+  // const { pageCurrent } = useStore.getState();
+  const pageCurrent = useStore((state) => state.pageCurrent)
+  console.log("pageCurrent ->", pageCurrent)
+
 
   useEffect(() => {
+
     if (logoStatus !== 'init') {
       if (pageCurrent !== 'home') {
         videoRef?.current?.play();
@@ -66,17 +72,6 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
     }
   };
 
-  // const logoCloseEvent = () => {
-  //   if (logoStatus === 'init') {
-  //     videoRef?.current?.play();
-  //   } else if (logoStatus === 'logo') {
-  //     videoRef?.current?.play();
-  //     setLogoAnimate('logo-to-close');
-  //   } else {
-  //     handleVideoRewind();
-  //     setLogoAnimate('close-to-logo');
-  //   }
-  // };
 
   const handleOnEnded = () => {
     setLogoStatus('close');

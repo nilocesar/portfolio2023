@@ -20,8 +20,8 @@ module.exports = {
   swcMinify: true,
   compiler: {
     styledComponents: true,
-    removeConsole: {
-      exclude: ['error']
-    }
+    // removeConsole: {
+    //   exclude: ['error']
+    // }
   }
 };

@@ -26,7 +26,8 @@ const ralewayFont = Jura({
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const { modelSelect } = modelScreen(0);
+
+  const { modelSelect } = modelScreen(0);/// TODO: so ta referenciado a um
 
   return (
     <html lang="en" className={ralewayFont.className}>
