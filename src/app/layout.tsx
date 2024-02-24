@@ -1,5 +1,3 @@
-// 'use client';
-
 import '../styles/globals.scss';
 import '../styles/sidebar.scss';
 
@@ -7,12 +5,11 @@ import type { Metadata } from 'next';
 import { Jura } from 'next/font/google';
 import { ReactNode } from 'react';
 
-import { AppWrapper } from 'context';
+import { getCache } from 'hooks/useCache';
+import { Providers } from 'providers';
 
 import { Canvas } from 'components/Canvas';
 import { Sidebar } from 'components/Sidebar';
-
-import { modelScreen } from 'utils/modelScreen';
 
 export const metadata: Metadata = {
   title: 'Nilo César',
@@ -26,23 +23,16 @@ const ralewayFont = Jura({
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-
-  const { modelSelect } = modelScreen(0);/// TODO: so ta referenciado a um
-
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
-        <AppWrapper>
-          <Canvas />
-          <main
-            className={`h-screen flex flex-initial flex-wrap ${
-              modelSelect ? modelSelect.base : ''
-            }`}
-          >
-            <Sidebar modelSelect={modelSelect ? modelSelect.sidebar : ''} />
-            {children}
-          </main>
-        </AppWrapper>
+        <Canvas />
+        <main
+          className={`h-screen flex flex-initial flex-wrap ${getCache() ? getCache().base : ''}`}
+        >
+          <Sidebar modelSelect={getCache() ? getCache().sidebar : ''} />
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );

@@ -9,11 +9,6 @@ import { useAbout } from '../../hooks/useAbout';
 export default function Template({ children }: { children: ReactNode }) {
   const { originPage, borderAnim } = useAbout();
 
-
-  // return <div>
-  //   menu
-  // </div>
-
   return (
     <AnimatePresence mode={'sync'}>
       <motion.div

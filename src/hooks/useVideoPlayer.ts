@@ -60,9 +60,6 @@ const useVideoPlayer = (videoElement: MutableRefObject<HTMLVideoElement>) => {
     const intervalRewind = setInterval(function () {
       videoElement.current.playbackRate = 1.0;
 
-      // const progress =  (videoElement.current.currentTime / videoElement.current.duration) * 100 || 0;
-      // console.log(videoElement.current.currentTime);
-
       if (videoElement.current.currentTime < 0.8) {
         clearInterval(intervalRewind);
         togglePlay();
