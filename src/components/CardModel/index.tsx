@@ -11,7 +11,7 @@ type Props = {
 
 export function CardModel({ it }: Props) {
   const { isIOS } = useDevice();
-  console.log(it);
+  console.log(it); /// console.log só para resolver o lint por enquanto
 
   return (
     <motion.li
