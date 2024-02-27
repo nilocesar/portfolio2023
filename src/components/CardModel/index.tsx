@@ -1,20 +1,20 @@
-'use client';
-
 import Image from 'next/image';
 
-import { motion } from 'framer-motion';
-import { useDevice } from 'hooks/useDevice';
+import { MotionButton, MotionLi, MotionVideo } from 'components/MotionElement';
 
 type Props = {
   it: number;
 };
 
 export function CardModel({ it }: Props) {
-  const { isIOS } = useDevice();
-  console.log(it); /// console.log só para resolver o lint por enquanto
+
+  const iosDevice = getComputedStyle(document.documentElement).getPropertyValue('--isDEVICE');
+  const isIOS = String(iosDevice) === 'ok';
+
+  console.log(isIOS );
 
   return (
-    <motion.li
+    <MotionLi
       initial={{
         opacity: 0
       }}
@@ -35,7 +35,7 @@ export function CardModel({ it }: Props) {
           className={`h-[100%] w-full object-cover absolute`}
         />
       ) : (
-        <motion.video
+        <MotionVideo
           src="./spritesheet.webm"
           className={`h-[100%] w-full object-cover absolute`}
           autoPlay={true}
@@ -56,7 +56,7 @@ export function CardModel({ it }: Props) {
         />
       )}
 
-      <motion.button
+      <MotionButton
         initial={{
           opacity: 0
         }}
@@ -76,7 +76,7 @@ export function CardModel({ it }: Props) {
           className={`object-cover transition-opacity ease-in-out opacity-[0.3] duration-[1s] hover:opacity-[0.7] cursor-pointer`}
           // onLoadingComplete={(img) => imgLoading(img)}
         />
-      </motion.button>
-    </motion.li>
+      </MotionButton>
+    </MotionLi>
   );
 }

@@ -23,17 +23,17 @@ export default function Template({ children }: { children: ReactNode }) {
       display: 'block',
       width: '100%',
       height: '100%',
-      borderTopColor: 'rgb(255 251 235)',
-      borderRightColor: 'rgb(255 251 235)',
+      borderTopColor: 'rgba(255 251 235, 1)',
+      borderRightColor: 'rgba(255 251 235, 1)',
       transition: {
         width: {
           duration: 0.25,
-          ease: 'easeOut',
+          ease: 'easeInOut',
           delay: timeAbout(originPage)
         },
         height: {
           duration: 0.25,
-          ease: 'easeOut',
+          ease: 'easeInOut',
           delay: timeAbout(originPage, 0.25)
         }
       }
@@ -54,22 +54,22 @@ export default function Template({ children }: { children: ReactNode }) {
       display: 'block',
       width: '100%',
       height: '100%',
-      borderBottomColor: 'rgb(255 251 235)',
-      borderLeftColor: 'rgb(255 251 235)',
+      borderBottomColor: 'rgba(255 251 235, 1)',
+      borderLeftColor: 'rgba(255 251 235, 1)',
       transition: {
         borderColor: {
           duration: 0,
-          ease: 'easeOut',
+          ease: 'easeInOut',
           delay: timeAbout(originPage, 0.5)
         },
         width: {
           duration: 0.25,
-          ease: 'easeOut',
+          ease: 'easeInOut',
           delay: timeAbout(originPage, 0.5)
         },
         height: {
           duration: 0.25,
-          ease: 'easeOut',
+          ease: 'easeInOut',
           delay: timeAbout(originPage, 0.75)
         }
       }
