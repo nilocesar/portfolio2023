@@ -4,16 +4,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useRef, MutableRefObject } from 'react';
 
-import { motion } from 'framer-motion';
-import { useDevice } from 'hooks/useDevice';
-
 import { DELAY_INIT } from 'utils/constants';
 
 import useSidebar from '../../hooks/useSidebar';
+import { MotionDiv, MotionP } from 'components/MotionElement';
 
 const SignatureTop = () => {
-  const { isIOS } = useDevice();
 
+  const isIOS = false;
   const router = useRouter();
 
   const callHome = () => {
@@ -27,7 +25,7 @@ const SignatureTop = () => {
   );
 
   return (
-    <motion.div
+    <MotionDiv
       initial={{
         opacity: 0
       }}
@@ -41,7 +39,7 @@ const SignatureTop = () => {
       }}
       className={'logoBase relative pl-5 pt-10'}
     >
-      <motion.div
+      <MotionDiv
         className={`logoClose cursor-pointer ${
           pageCurrent === 'home' ? 'pointer-events-none' : ''
         }`}
@@ -90,9 +88,9 @@ const SignatureTop = () => {
             className={`logo ${logoAnimate}`}
           />
         )}
-      </motion.div>
+      </MotionDiv>
 
-      <motion.p
+      <MotionP
         initial={{
           opacity: 0,
           x: '100px',
@@ -111,8 +109,8 @@ const SignatureTop = () => {
         className={`text-amber-50 font-bold my-0.5`}
       >
         FRONT-END
-      </motion.p>
-    </motion.div>
+      </MotionP>
+    </MotionDiv>
   );
 };
 

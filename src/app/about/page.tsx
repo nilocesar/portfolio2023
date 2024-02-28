@@ -7,9 +7,13 @@ import { MotionDiv } from 'components/MotionElement';
 import { timeAbout } from 'utils/motionTime';
 
 const About = () => {
-  const originPage = usePageStore.getState().originPage;
+  const originPage = usePageStore.getState().state.page.originPage;
 
-  usePageStore.getState().handlePageCurrent('about');
+  // usePageStore.getState().handlePageCurrent('about');
+
+  usePageStore.setState({ state: { page: { originPage : '', pageCurrent: 'about' } } });
+  console.log('dd ' + usePageStore.getState().state.page?.originPage);
+  console.log('qq ' + usePageStore.getState().state.page?.pageCurrent);
 
   const variants = {
     hidden: { display: 'none' },

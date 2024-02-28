@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           className={`h-screen flex flex-initial flex-wrap ${getCache() ? getCache().base : ''}`}
         >
           <Sidebar modelSelect={getCache() ? getCache().sidebar : ''} />
-          <Providers>{children}</Providers>
+          {children}
         </main>
       </body>
     </html>

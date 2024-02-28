@@ -4,27 +4,40 @@ import { MotionButton, MotionLi, MotionVideo } from 'components/MotionElement';
 
 type Props = {
   it: number;
+  delay: number;
 };
 
-export function CardModel({ it }: Props) {
+export function CardModel({ it, delay }: Props) {
+  // const iosDevice = (window !== undefined) ? window.getComputedStyle(document.documentElement).getPropertyValue('--isDEVICE') : null ;
+  const isIOS = String('s') === 'ok'; /// String(iosDevice)
 
-  const iosDevice = getComputedStyle(document.documentElement).getPropertyValue('--isDEVICE');
-  const isIOS = String(iosDevice) === 'ok';
+  if (typeof window !== 'undefined') {
+    console.log('window.innerHeight', window);
+  }
+  // console.log(isIOS);
 
-  console.log(isIOS );
+  const variantsLi = {
+    hidden: {
+      display: 'none'
+    },
+    visible: {
+      display: 'block',
+      transition: {
+        display: {
+          duration: 0.25,
+          ease: 'easeInOut',
+          delay: delay
+        }
+      }
+    }
+  };
+
 
   return (
     <MotionLi
-      initial={{
-        opacity: 0
-      }}
-      animate={{
-        opacity: 1
-      }}
-      transition={{
-        duration: 0.5,
-        ease: 'easeIn'
-      }}
+      variants={variantsLi}
+      initial="hidden"
+      animate="visible"
       className={`relative h-[7rem] sm:h-[14rem] w-full border-b-[0.2rem] border-neutral-500 block`}
     >
       {isIOS ? (
@@ -51,7 +64,7 @@ export function CardModel({ it }: Props) {
           transition={{
             duration: 0.3,
             ease: 'easeInOut',
-            delay: 1.6
+            delay: delay + 1.6
           }}
         />
       )}
@@ -66,7 +79,7 @@ export function CardModel({ it }: Props) {
         transition={{
           duration: 1,
           ease: 'easeOut',
-          delay: 0.8
+          delay: delay + 0.8
         }}
       >
         <Image
