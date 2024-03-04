@@ -7,7 +7,7 @@ import { MotionDiv, MotionAside } from 'components/MotionElement';
 import { timeAbout } from 'utils/motionTime';
 
 export default function Template({ children }: { children: ReactNode }) {
-  const originPage = usePageStore.getState().originPage;
+  const originPage = usePageStore.getState().state.page.originPage;
 
   const variantsLine1 = {
     hidden: {
