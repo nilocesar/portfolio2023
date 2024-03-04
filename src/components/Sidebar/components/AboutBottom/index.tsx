@@ -5,14 +5,19 @@ import { BsLinkedin, BsGithub } from 'react-icons/bs';
 
 import { motion } from 'framer-motion';
 
+import { usePageStore } from 'store';
+
 import { DELAY_INIT } from 'utils/constants';
 
 // interface Props {
 //   className?: string;
 // }
 
-const AboutBottom = () => {
+const AboutBottom = async () => {
   const router = useRouter();
+
+  const pageCurrent = usePageStore.getState().state.page.pageCurrent;
+  console.log(pageCurrent);
 
   const callAbout = () => {
     router.push('/about');
@@ -39,7 +44,9 @@ const AboutBottom = () => {
         <button
           type="button"
           onClick={() => callAbout()}
-          className="bg-amber-50 aboutTxt cursor-pointer hover:bg-amber-200 text-xl"
+          className={`bg-amber-50 aboutTxt cursor-pointer hover:bg-amber-200 text-xl ${
+            pageCurrent === 'about' ? 'pointer-events-none' : ''
+          }`}
         >
           ABOUT
         </button>
