@@ -1,17 +1,30 @@
 
 import { usePageStore } from 'store';
+import { getPathname } from 'next-impl-getters/get-pathname';
 
 import { CardModel } from 'components/CardModel';
 import { MotionDiv } from 'components/MotionElement';
 
 import { timeHome } from 'utils/motionTime';
 
-import { PageInitializer } from 'utils/PageInitializer';
 
-export default function HomeContainer() {
+export default async function HomeContainer() {
 
   const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const pageCurrent = usePageStore.getState().state.page?.pageCurrent;
+  const pageCurrent = usePageStore.getState().state.page.pageCurrent;
+
+  const pathname = getPathname();
+  usePageStore.setState({
+     state: {
+       page: {
+         originPage: pathname === '/' ? 'home' : '',
+         pageCurrent: pathname === '/' ? 'home' : ''
+       }
+     }
+   });
+
+  console.log(pathname);
+  console.log(pageCurrent);
 
   const variantsHome = {
     hidden: {
@@ -29,10 +42,9 @@ export default function HomeContainer() {
     }
   };
 
-   usePageStore.setState({ state: { page: { originPage: 'home', pageCurrent: 'home' } } });
+  // usePageStore.setState({ state: { page: { originPage: 'home', pageCurrent: 'home' } } });
 
-  // usePageStore.getState().handleOriginPage('home');
-  // usePageStore.getState().handlePageCurrent('home');
+
 
   return (
     <>
