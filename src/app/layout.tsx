@@ -10,9 +10,6 @@ import { getCache } from 'hooks/useCache';
 import { Canvas } from 'components/Canvas';
 import { Sidebar } from 'components/Sidebar';
 
-import { PageInitializer } from 'utils/PageInitializer';
-import { usePageStore } from 'store';
-
 export const metadata: Metadata = {
   title: 'Nilo César',
   description:
@@ -26,7 +23,6 @@ const ralewayFont = Jura({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 
-
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
@@ -35,12 +31,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           className={`h-screen flex flex-initial flex-wrap ${getCache() ? getCache().base : ''}`}
         >
           <Sidebar modelSelect={getCache() ? getCache().sidebar : ''} />
-          <PageInitializer
-            page={{
-              originPage: usePageStore.getState().state.page.originPage,
-              pageCurrent: usePageStore.getState().state.page.pageCurrent
-            }}
-          />
           {children}
         </main>
       </body>

@@ -2,6 +2,8 @@
 import { useState, useEffect, MutableRefObject } from 'react';
 import { usePathname } from 'next/navigation';
 
+import { usePageStore } from "store";
+
 
 type VideoElement = MutableRefObject<HTMLVideoElement | undefined | null>;
 
@@ -9,18 +11,21 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
   const [logoStatus, setLogoStatus] = useState<string>('init');
   const [logoAnimate, setLogoAnimate] = useState<string>('close-to-logo');
 
-   const pathname = usePathname();
-  const pageCurrent = pathname === '/' ? 'home': 'about';
+  const pathname = usePathname();
+  const pageCurrent = pathname === '/' ? 'home': 'other';
 
   useEffect(() => {
     if (logoStatus !== 'init') {
       if (pageCurrent !== 'home') {
         videoRef?.current?.play();
         setLogoAnimate('logo-to-close');
+
       } else {
         handleVideoRewind();
         setLogoAnimate('close-to-logo');
       }
+      console.log('change page')
+      // usePageStore.setState({state:{ page: { pageCurrent: pageCurrent} } });
     }
   }, [pageCurrent]);
 

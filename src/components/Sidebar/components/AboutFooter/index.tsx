@@ -1,37 +1,19 @@
-'use client';
 
-import { useRouter } from 'next/navigation';
 import { BsLinkedin, BsGithub } from 'react-icons/bs';
-
-import { motion } from 'framer-motion';
-
-import { usePageStore } from 'store';
 
 import { DELAY_INIT } from 'utils/constants';
 
-// interface Props {
-//   className?: string;
-// }
+import { MotionDiv } from 'components/MotionElement';
+import AboutButton from '../AboutButton';
 
-const AboutBottom = async () => {
-  const router = useRouter();
-
-  const pageCurrent = usePageStore.getState().state.page.pageCurrent;
-  console.log(pageCurrent);
-
-  const callAbout = () => {
-    router.push('/about');
-  };
-
+const AboutFooter = () => {
   return (
-    <motion.div
+    <MotionDiv
       initial={{
         opacity: 0
-        // x: '200px'
       }}
       animate={{
         opacity: 1
-        // x: '0'
       }}
       transition={{
         duration: 0.5,
@@ -41,15 +23,7 @@ const AboutBottom = async () => {
       className={'relative about'}
     >
       <div className="relative w-auto">
-        <button
-          type="button"
-          onClick={() => callAbout()}
-          className={`bg-amber-50 aboutTxt cursor-pointer hover:bg-amber-200 text-xl ${
-            pageCurrent === 'about' ? 'pointer-events-none' : ''
-          }`}
-        >
-          ABOUT
-        </button>
+        <AboutButton />
         <div className="listSocial flex gap-2 pt-2">
           <a
             href="https://www.linkedin.com/in/nilo-cesar/"
@@ -69,8 +43,8 @@ const AboutBottom = async () => {
           </a>
         </div>
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 
-export default AboutBottom;
+export default AboutFooter;

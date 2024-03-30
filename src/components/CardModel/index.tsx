@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import Image from 'next/image';
 
-import { MotionButton, MotionLi, MotionVideo } from 'components/MotionElement';
+import { MotionButton, MotionDiv, MotionLi, MotionVideo } from 'components/MotionElement';
 
 type Props = {
   it: number;
@@ -11,9 +12,9 @@ export function CardModel({ it, delay }: Props) {
   // const iosDevice = (window !== undefined) ? window.getComputedStyle(document.documentElement).getPropertyValue('--isDEVICE') : null ;
   const isIOS = String('s') === 'ok'; /// String(iosDevice)
 
-  if (typeof window !== 'undefined') {
-    console.log('window.innerHeight', window);
-  }
+  // if (typeof window !== 'undefined') {
+  //   console.log('window.innerHeight', window);
+  // }
   // console.log(isIOS);
 
   const variantsLi = {
@@ -24,14 +25,13 @@ export function CardModel({ it, delay }: Props) {
       display: 'block',
       transition: {
         display: {
-          duration: 0.25,
+          duration: 0.5,
           ease: 'easeInOut',
           delay: delay
         }
       }
     }
   };
-
 
   return (
     <MotionLi
@@ -64,32 +64,40 @@ export function CardModel({ it, delay }: Props) {
           transition={{
             duration: 0.3,
             ease: 'easeInOut',
-            delay: delay + 1.6
+            delay: delay + 2
           }}
         />
       )}
 
-      <MotionButton
-        initial={{
-          opacity: 0
+      <Link
+        href={{
+          pathname: '/project',
+          query: { item: it }
         }}
-        animate={{
-          opacity: 1
-        }}
-        transition={{
-          duration: 1,
-          ease: 'easeOut',
-          delay: delay + 0.8
-        }}
+        className={''}
       >
-        <Image
-          src={`https://picsum.photos/600/400`}
-          alt=""
-          fill
-          className={`object-cover transition-opacity ease-in-out opacity-[0.3] duration-[1s] hover:opacity-[0.7] cursor-pointer`}
-          // onLoadingComplete={(img) => imgLoading(img)}
-        />
-      </MotionButton>
+        <MotionDiv
+          initial={{
+            opacity: 0
+          }}
+          animate={{
+            opacity: 1
+          }}
+          transition={{
+            duration: 1,
+            ease: 'easeOut',
+            delay: delay + 1
+          }}
+        >
+          <Image
+            src={`https://picsum.photos/600/400`}
+            alt=""
+            fill
+            className={`object-cover transition-opacity ease-in-out opacity-[0.3] duration-[1s] hover:opacity-[0.7] cursor-pointer`}
+            // onLoadingComplete={(img) => imgLoading(img)}
+          />
+        </MotionDiv>
+      </Link>
     </MotionLi>
   );
 }

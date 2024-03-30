@@ -1,5 +1,5 @@
-import { NextPageContext } from 'next';
-import AboutBottom from './components/AboutBottom';
+
+import AboutFooter from './components/AboutFooter';
 import SignatureTop from './components/SignatureTop';
 
 interface Props {
@@ -9,13 +9,14 @@ interface Props {
 
 export function Sidebar({ modelSelect, className = '' }: Props) {
 
+
   return (
     <aside
       className={`bg-stone-950 bg-opacity-90 ${modelSelect} ${className}
       opacity-[0] animate-fadeInInit animation-delay-1000 overflow-hidden`}
     >
       <SignatureTop />
-      <AboutBottom />
+      <AboutFooter />
     </aside>
   );
 }

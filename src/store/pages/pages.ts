@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type PageStore = { pageCurrent?: string , originPage?: string }
+type PageStore = { pageCurrent?: string , init?: boolean }
 
 type StoreProps = {
    state:{
@@ -11,7 +11,7 @@ type StoreProps = {
 
 export const usePageStore = create<StoreProps>()((set) => ({
   state : {
-    page: {pageCurrent:'home', originPage: '' }
+    page: {pageCurrent:'home', init: true }
   },
   actions: {
     handleSetPage: (pageChange) => {

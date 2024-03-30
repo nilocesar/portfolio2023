@@ -1,30 +1,25 @@
+'use client';
 
+import { useEffect } from 'react';
 import { usePageStore } from 'store';
-import { getPathname } from 'next-impl-getters/get-pathname';
 
 import { CardModel } from 'components/CardModel';
 import { MotionDiv } from 'components/MotionElement';
 
 import { timeHome } from 'utils/motionTime';
 
-
-export default async function HomeContainer() {
+export default function HomeContainer() {
 
   const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const pageCurrent = usePageStore.getState().state.page.pageCurrent;
 
-  const pathname = getPathname();
-  usePageStore.setState({
-     state: {
-       page: {
-         originPage: pathname === '/' ? 'home' : '',
-         pageCurrent: pathname === '/' ? 'home' : ''
-       }
-     }
-   });
+  const { pageCurrent } = usePageStore((res) => {
+    return res.state.page;
+  });
 
-  console.log(pathname);
-  console.log(pageCurrent);
+  useEffect(() => {
+    usePageStore.setState({ state: { page: { pageCurrent: 'home',  init: false } } });
+  }, []);
+
 
   const variantsHome = {
     hidden: {
@@ -42,13 +37,8 @@ export default async function HomeContainer() {
     }
   };
 
-  // usePageStore.setState({ state: { page: { originPage: 'home', pageCurrent: 'home' } } });
-
-
-
   return (
     <>
-
       <MotionDiv
         variants={variantsHome}
         initial="hidden"
@@ -57,9 +47,8 @@ export default async function HomeContainer() {
       >
         <ul className={`relative`}>
           {items.map((it, i) => {
-            return (
-              <CardModel key={'s' + it} it={it} delay={timeHome(pageCurrent) + i / 10 + 0.2} />
-            );
+            const delay = timeHome(pageCurrent) + i / 10 + 0.5;
+            return <CardModel key={'s' + it} it={it} delay={delay} />;
           })}
         </ul>
       </MotionDiv>
