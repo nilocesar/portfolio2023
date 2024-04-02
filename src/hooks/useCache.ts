@@ -11,7 +11,7 @@ export const getCacheData = cache(() => {
   const sb_w = randomInteger(17, 35);
   const sb_h = randomInteger(12, 17);
 
-  return `${sb_model}, ${sb_w}, ${sb_model}`;
+  return `${sb_h}, ${sb_w}, ${sb_model}`;
 });
 
 export const getCache = cache(() => {
