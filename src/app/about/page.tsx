@@ -4,9 +4,10 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 
 import { MotionDiv, MotionAside } from 'components/MotionElement';
-import { usePageStore } from 'store';
 
 import { timeOther } from 'utils/motionTime';
+
+import { usePageStore } from 'store';
 
 const About = () => {
   const { init } = usePageStore((res) => {

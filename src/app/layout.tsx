@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 
 import { Canvas } from 'components/Canvas';
 import { Sidebar } from 'components/Sidebar';
+
 import { getCache } from 'hooks/useCache';
 
 export const metadata: Metadata = {

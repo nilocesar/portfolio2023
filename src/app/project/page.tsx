@@ -11,12 +11,14 @@ import {
   CarouselPrevious,
   type CarouselApi
 } from '@/shadcn-ui/ui/carousel';
+
 import CardProject from 'components/CardProject';
 import { MotionDiv } from 'components/MotionElement';
-import { usePageStore } from 'store';
 
 import { cn } from 'utils/cn';
 import { timeOther } from 'utils/motionTime';
+
+import { usePageStore } from 'store';
 
 const Project = () => {
   const router = useRouter();

@@ -1,8 +1,7 @@
 {
-  "root": true,
   "env": {
     "browser": true,
-    "es6": true,
+    "es2021": true,
     "node": true
   },
   "settings": {
@@ -10,6 +9,12 @@
       "version": "detect"
     }
   },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -18,23 +23,8 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "react-hooks",
-    "import-helpers",
-    "eslint-plugin-import-helpers",
-    "testing-library"
-  ],
+  "plugins": ["react", "@typescript-eslint", "react-hooks", "import-helpers"],
   "rules": {
-    "no-unused-vars": [
-      "error",
-      {
-        "varsIgnorePattern": "React"
-      }
-    ],
-    "react/jsx-uses-vars": "error",
-    "react/jsx-uses-react": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
@@ -50,29 +40,19 @@
           "module",
           "/^@shared/",
           "absolute",
-          "/^src/components/",
-          "/^src/hooks/",
-          "/^src/shadcn-ui/",
-          "/^src/stores/",
-          "/^src/styles/",
-          "/^src/utils/",
+          "/^components/",
           "/^pages/",
           "/utils/",
+          "/constants/",
+          "/^store/",
           "/^styles/",
+          "/^hooks/",
+          "/^app/",
+          "/^templates/",
           ["parent", "sibling", "index"]
         ],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ]
-  },
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "plugin:@next/next/recommended",
-    "eslint:recommended",
-    "next",
-    "next/core-web-vitals",
-    "prettier"
-  ]
+  }
 }
