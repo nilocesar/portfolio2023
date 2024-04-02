@@ -1,7 +1,7 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, useCallback, Suspense } from 'react';
+// import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import {
   Carousel,
@@ -21,9 +21,9 @@ import { timeOther } from 'utils/motionTime';
 import { usePageStore } from 'store';
 
 const Project = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const router = useRouter();
+  // const pathname = usePathname();
+  // const searchParams = useSearchParams();
 
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -32,29 +32,30 @@ const Project = () => {
     return res.state.page;
   });
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
+  // const createQueryString = useCallback(
+  //   (name: string, value: string) => {
+  //     const params = new URLSearchParams(searchParams.toString());
+  //     params.set(name, value);
 
-      return params.toString();
-    },
-    [searchParams]
-  );
+  //     return params.toString();
+  //   },
+  //   [searchParams]
+  // );
 
   useEffect(() => {
     if (!api) {
       return;
     }
 
-    const item = searchParams.get('item');
+    // const item = searchParams.get('item');
+    const item = '1';
     setCurrent(Number(item));
     usePageStore.setState({ state: { page: { pageCurrent: 'project' + item, init: false } } });
 
     api.on('select', () => {
       const itemCurrent = api.selectedScrollSnap();
       setCurrent(itemCurrent);
-      router.push(pathname + '?' + createQueryString('item', itemCurrent.toString()));
+      // router.push(pathname + '?' + createQueryString('item', itemCurrent.toString()));
     });
   }, [api]);
 
@@ -124,7 +125,7 @@ const Project = () => {
   };
 
   return (
-    <Suspense>
+    <>
       <MotionDiv
         className="aboutScreen"
         initial={{ scale: 0.85, opacity: 0 }}
@@ -184,7 +185,7 @@ const Project = () => {
           </MotionDiv>
         </div>
       </MotionDiv>
-    </Suspense>
+    </>
   );
 };
 
