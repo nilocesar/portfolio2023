@@ -1,4 +1,3 @@
-
 import AboutFooter from './components/AboutFooter';
 import SignatureTop from './components/SignatureTop';
 
@@ -8,8 +7,6 @@ interface Props {
 }
 
 export function Sidebar({ modelSelect, className = '' }: Props) {
-
-
   return (
     <aside
       className={`bg-stone-950 bg-opacity-90 ${modelSelect} ${className}

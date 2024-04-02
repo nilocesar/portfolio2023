@@ -1,9 +1,9 @@
-
 import { BsLinkedin, BsGithub } from 'react-icons/bs';
+
+import { MotionDiv } from 'components/MotionElement';
 
 import { DELAY_INIT } from 'utils/constants';
 
-import { MotionDiv } from 'components/MotionElement';
 import AboutButton from '../AboutButton';
 
 const AboutFooter = () => {

@@ -22,7 +22,6 @@ const ralewayFont = Jura({
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">

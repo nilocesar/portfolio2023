@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import { usePageStore } from 'store';
 
 import { CardModel } from 'components/CardModel';
@@ -9,7 +10,6 @@ import { MotionDiv } from 'components/MotionElement';
 import { timeHome } from 'utils/motionTime';
 
 export default function HomeContainer() {
-
   const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const { pageCurrent } = usePageStore((res) => {
@@ -17,9 +17,8 @@ export default function HomeContainer() {
   });
 
   useEffect(() => {
-    usePageStore.setState({ state: { page: { pageCurrent: 'home',  init: false } } });
+    usePageStore.setState({ state: { page: { pageCurrent: 'home', init: false } } });
   }, []);
-
 
   const variantsHome = {
     hidden: {

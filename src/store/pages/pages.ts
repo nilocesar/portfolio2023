@@ -1,25 +1,27 @@
 import { create } from 'zustand';
 
-type PageStore = { pageCurrent?: string , init?: boolean }
+type PageStore = { pageCurrent?: string; init?: boolean };
 
 type StoreProps = {
-   state:{
-    page: PageStore
-   },
-   actions: { handleSetPage: (pageChange:PageStore) => void }
+  state: {
+    page: PageStore;
+  };
+  actions: {
+    handleSetPage: (pageChange: PageStore) => void /* eslint no-unused-vars : "off" */;
+  };
 };
 
 export const usePageStore = create<StoreProps>()((set) => ({
-  state : {
-    page: {pageCurrent:'home', init: true }
+  state: {
+    page: { pageCurrent: 'home', init: true }
   },
   actions: {
-    handleSetPage: (pageChange) => {
+    handleSetPage: (pageChange: PageStore) => {
       set((st) => ({
-        state : {
+        state: {
           page: { ...st.state.page, ...pageChange }
-        },
-    }));
-  },
+        }
+      }));
+    }
   }
 }));

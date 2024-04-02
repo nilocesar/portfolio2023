@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
-import { MotionButton, MotionDiv, MotionLi, MotionVideo } from 'components/MotionElement';
+import { MotionDiv, MotionLi, MotionVideo } from 'components/MotionElement';
 
 type Props = {
   it: number;

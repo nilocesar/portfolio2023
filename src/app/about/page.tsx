@@ -1,14 +1,13 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 import { usePageStore } from 'store';
 
 import { MotionDiv, MotionAside } from 'components/MotionElement';
 
 import { timeOther } from 'utils/motionTime';
-
 
 const About = () => {
   const { init } = usePageStore((res) => {
@@ -18,7 +17,6 @@ const About = () => {
   useEffect(() => {
     usePageStore.setState({ state: { page: { pageCurrent: 'about', init: false } } });
   }, [usePageStore]);
-
 
   const variants = {
     hidden: { display: 'none' },
@@ -32,7 +30,7 @@ const About = () => {
       width: 0,
       height: 0,
       top: 0,
-      left: 0,
+      left: 0
     },
     visible: {
       display: 'block',
@@ -62,7 +60,7 @@ const About = () => {
       width: 0,
       height: 0,
       bottom: 0,
-      right: 0,
+      right: 0
     },
     visible: {
       display: 'block',

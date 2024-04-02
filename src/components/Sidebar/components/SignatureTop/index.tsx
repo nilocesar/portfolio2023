@@ -4,13 +4,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useRef, MutableRefObject } from 'react';
 
+import { MotionDiv, MotionP } from 'components/MotionElement';
+
 import { DELAY_INIT } from 'utils/constants';
 
 import useSidebar from '../../hooks/useSidebar';
-import { MotionDiv, MotionP } from 'components/MotionElement';
 
 const SignatureTop = () => {
-
   const isIOS = false;
   const router = useRouter();
 

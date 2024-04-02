@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "yarn eslint --fix src"
+    "lint": "next lint"
   },
   "dependencies": {
     "@openlab/vercel-netlify-cms-github": "^1.1.1",
@@ -21,6 +21,7 @@
     "decap-cms-app": "^3.0.7",
     "embla-carousel-react": "^8.0.0",
     "eslint-config-next": "^14.0.2",
+    "eslint-formatter-stylish": "^8.40.0",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.363.0",
     "next": "^14.0.2",

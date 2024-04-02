@@ -1,9 +1,5 @@
-
-import { useState, useEffect, MutableRefObject } from 'react';
 import { usePathname } from 'next/navigation';
-
-import { usePageStore } from "store";
-
+import { useState, useEffect, MutableRefObject, useCallback } from 'react';
 
 type VideoElement = MutableRefObject<HTMLVideoElement | undefined | null>;
 
@@ -12,30 +8,7 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
   const [logoAnimate, setLogoAnimate] = useState<string>('close-to-logo');
 
   const pathname = usePathname();
-  const pageCurrent = pathname === '/' ? 'home': 'other';
-
-  useEffect(() => {
-    if (logoStatus !== 'init') {
-      if (pageCurrent !== 'home') {
-        videoRef?.current?.play();
-        setLogoAnimate('logo-to-close');
-
-      } else {
-        handleVideoRewind();
-        setLogoAnimate('close-to-logo');
-      }
-      console.log('change page')
-      // usePageStore.setState({state:{ page: { pageCurrent: pageCurrent} } });
-    }
-  }, [pageCurrent]);
-
-  useEffect(() => {
-    if (videoRef?.current) {
-      setTimeout(() => {
-        videoRef?.current?.play();
-      }, 1000 * (DELAY_INIT + 1));
-    }
-  }, [videoRef, DELAY_INIT]);
+  const pageCurrent = pathname === '/' ? 'home' : 'other';
 
   const handleOnTimeUpdate = () => {
     if (videoRef.current) {
@@ -53,7 +26,7 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
     }
   };
 
-  const handleVideoRewind = () => {
+  const handleVideoRewind = useCallback(() => {
     if (videoRef.current) {
       const ref = videoRef.current;
       const intervalRewind = setInterval(function () {
@@ -71,11 +44,33 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
         }
       }, 30 * 2);
     }
-  };
+  }, [videoRef]);
 
   const handleOnEnded = () => {
     setLogoStatus('close');
   };
+
+  useEffect(() => {
+    if (logoStatus !== 'init') {
+      if (pageCurrent !== 'home') {
+        videoRef?.current?.play();
+        setLogoAnimate('logo-to-close');
+      } else {
+        handleVideoRewind();
+        setLogoAnimate('close-to-logo');
+      }
+      console.log('change page');
+      // usePageStore.setState({state:{ page: { pageCurrent: pageCurrent} } });
+    }
+  }, [pageCurrent, handleVideoRewind, logoStatus, videoRef]);
+
+  useEffect(() => {
+    if (videoRef?.current) {
+      setTimeout(() => {
+        videoRef?.current?.play();
+      }, 1000 * (DELAY_INIT + 1));
+    }
+  }, [videoRef, DELAY_INIT]);
 
   return {
     logoStatus,

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { usePageStore } from 'store';
 
-import {cn} from 'utils/cn';
+import { cn } from 'utils/cn';
 
 const AboutButton = () => {
   const { pageCurrent } = usePageStore((res) => {
