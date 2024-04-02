@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, Suspense } from 'react';
 
 import {
   Carousel,
@@ -123,7 +123,7 @@ const Project = () => {
   };
 
   return (
-    <>
+    <Suspense>
       <MotionDiv
         className="aboutScreen"
         initial={{ scale: 0.85, opacity: 0 }}
@@ -183,7 +183,7 @@ const Project = () => {
           </MotionDiv>
         </div>
       </MotionDiv>
-    </>
+    </Suspense>
   );
 };
 
