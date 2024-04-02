@@ -15,12 +15,16 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
       const ref = videoRef.current;
       const progress = (ref.currentTime / ref.duration) * 100 || 0;
 
+      console.log(logoStatus, pageCurrent, progress);
+
       if (logoStatus === 'init') {
         if (progress >= 35 && pageCurrent === 'home') {
           ref.pause();
           setLogoStatus('logo');
         } else {
-          if (progress >= 35) setLogoAnimate('logo-to-close');
+          if (progress >= 35) {
+            setLogoAnimate('logo-to-close');
+          }
         }
       }
     }
@@ -59,10 +63,9 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
         handleVideoRewind();
         setLogoAnimate('close-to-logo');
       }
-      console.log('change page');
       // usePageStore.setState({state:{ page: { pageCurrent: pageCurrent} } });
     }
-  }, [pageCurrent, handleVideoRewind, logoStatus, videoRef]);
+  }, [pageCurrent]);
 
   useEffect(() => {
     if (videoRef?.current) {
