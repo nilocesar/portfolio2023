@@ -8,7 +8,7 @@ import { ReactNode } from 'react';
 import { Canvas } from 'components/Canvas';
 import { Sidebar } from 'components/Sidebar';
 
-import { getCache } from 'hooks/useCache';
+import { getCache, getCacheData } from 'hooks/useCache';
 
 export const metadata: Metadata = {
   title: 'Nilo César',
@@ -29,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main
           className={`h-screen flex flex-initial flex-wrap ${getCache() ? getCache().base : ''}`}
         >
+          <h1>{getCacheData()}</h1>
           <Sidebar modelSelect={getCache() ? getCache().sidebar : ''} />
           {children}
         </main>

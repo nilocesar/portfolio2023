@@ -3,12 +3,10 @@ type modelScreenObj = {
   sidebar: string;
 };
 
-export const modelScreen = (randomModel: number) => {
-  const randomInteger = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-  const sb_w_randow = randomInteger(17, 35); /// valor do width sidebar
-  const sb_h_randow = randomInteger(12, 17); /// valor do height sidebar
+export const modelScreen = (randomModel: number , sb_w: number, sb_h:number ) => {
+
+  const sb_w_randow = sb_w; /// valor do width sidebar
+  const sb_h_randow = sb_h; /// valor do height sidebar
 
   const modelScreenItens: Array<modelScreenObj> = [
     {
