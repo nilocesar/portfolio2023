@@ -1,5 +1,5 @@
 @property --rotate {
-  syntax: "<angle>";
+  syntax: '<angle>';
   initial-value: 132deg;
   inherits: false;
 }
@@ -12,7 +12,7 @@ $displacement: 0%;
 @mixin backlight($x, $y, $spread, $size, $colorA, $colorB, $duration) {
   &:after {
     position: absolute;
-    content: "";
+    content: '';
     top: $y;
     left: $x;
     right: 0;
@@ -31,15 +31,15 @@ $displacement: 0%;
 
     @keyframes animateGlow {
       0% {
-        background-position: 0% 50%
+        background-position: 0% 50%;
       }
 
       50% {
-        background-position: 100% 50%
+        background-position: 100% 50%;
       }
 
       100% {
-        background-position: 0% 50%
+        background-position: 0% 50%;
       }
     }
   }
@@ -52,7 +52,7 @@ $displacement: 0%;
   align-items: center;
   width: 100%;
   height: 100%;
-  flex:1;
+  flex: 1;
 
   &::before {
     position: absolute;
@@ -63,7 +63,7 @@ $displacement: 0%;
     opacity: 0.95;
   }
 
-  .drawBorder{
+  .drawBorder {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -79,70 +79,67 @@ $displacement: 0%;
 
   ///
   .profile-card {
-      width: 56px;
-      height: 56px;
-      padding: 20px;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      z-index: 2;
-      // overflow: hidden;
-      opacity: 0;
-      margin-top: 70px;
-      transform: translate(-50%, -50%);
-      border-radius: 4px;
-      border: 1px solid rgb(255 251 235);
+    width: 56px;
+    height: 56px;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    // overflow: hidden;
+    opacity: 0;
+    margin-top: 70px;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    border: 1px solid rgb(255 251 235);
 
+    animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+      moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+      moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+      finish 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+
+    @media (max-width: 1024px) {
       animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
-                moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
-                moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-                finish 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
-
-      @media (max-width: 1024px) {
-        animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
-            moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
-            moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-            finish_mobile 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
-      }
-
-
-
-      &::before{
-        position: absolute;
-        content: 'N';
-        font-size: 3em;
-        line-height: 1;
-        color: rgb(255 251 235);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        animation: moveOut 1s 2.1s ease-in-out forwards;
-      }
-
-      @include backlight(0, 5vw, 5vw, 0.75, rgb(251 191 36), #ded4c1, 10s);
-      //@include backlight(0, 5vw, 5vw, 0.75, #FEDC97, #B0413E, 10s);
-
+        moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+        moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        finish_mobile 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
     }
 
-    .profile-bio {
-      position: relative;
+    &::before {
+      position: absolute;
+      content: 'N';
+      font-size: 3em;
+      line-height: 1;
+      color: rgb(255 251 235);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100%;
       height: 100%;
-      opacity: 0;
-      animation: moveIn 1s 3.1s ease forwards;
-      // background-color: rgba(20, 24, 36, 0.9);
-      background-color: rgb(17 17 17 / 80%);
-      padding: 20px;
-      overflow: hidden;
+      top: 0;
+      left: 0;
+      animation: moveOut 1s 2.1s ease-in-out forwards;
+    }
 
-      .profile-container{
-        position: relative;
-        width: 100%;
-      }
+    @include backlight(0, 5vw, 5vw, 0.75, rgb(251 191 36), #ded4c1, 10s);
+    //@include backlight(0, 5vw, 5vw, 0.75, #FEDC97, #B0413E, 10s);
+  }
+
+  .profile-bio {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: moveIn 1s 3.1s ease forwards;
+    // background-color: rgba(20, 24, 36, 0.9);
+    background-color: rgb(17 17 17 / 80%);
+    padding: 20px;
+    overflow: hidden;
+
+    .profile-container {
+      position: relative;
+      width: 100%;
+    }
   }
 
   .avatar {
@@ -173,20 +170,20 @@ $displacement: 0%;
       mix-blend-mode: screen;
 
       &:nth-child(1) {
-        border-color: #FEDC97;
+        border-color: #fedc97;
         transform-origin: 50%-$displacement 50%;
         animation: spin1 $spin-time linear infinite;
       }
 
       &:nth-child(2) {
         border-color: rgb(244, 209, 119);
-        transform-origin: 50% 50%+$displacement;
+        transform-origin: 50% 50% + $displacement;
         animation: spin2 $spin-time linear infinite;
       }
 
       &:nth-child(3) {
         border-color: rgb(251 191 36);
-        transform-origin: 50%+$displacement 50%;
+        transform-origin: 50% + $displacement 50%;
         animation: spin3 $spin-time linear infinite;
       }
 
@@ -198,9 +195,6 @@ $displacement: 0%;
     }
   }
 }
-
-
-
 
 @keyframes init {
   0% {
@@ -276,7 +270,6 @@ $displacement: 0%;
   }
 }
 
-
 @keyframes moveIn {
   0% {
     opacity: 0;
@@ -322,7 +315,6 @@ $displacement: 0%;
   }
 }
 
-
 @keyframes spin {
   0% {
     --rotate: 0deg;
@@ -332,7 +324,6 @@ $displacement: 0%;
     --rotate: 360deg;
   }
 }
-
 
 @keyframes spin1 {
   0% {

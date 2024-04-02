@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --isDEVICE : all;
+  --isDEVICE: all;
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -51,7 +51,6 @@
 }
 
 @media (max-width: 900px) {
-
   html,
   body {
     height: 100% !important;
@@ -74,11 +73,11 @@
   }
 }
 
-body{
+body {
   background-image: url('/noise2.gif');
 }
 
-canvas{
+canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -110,10 +109,9 @@ canvas{
   // border-bottom: 4px solid var(--colors-black);
   transition: all 1s ease;
 
-  &:hover{
+  &:hover {
     background-color: rgb(254 243 199);
   }
-
 }
 
 .h-full {
@@ -161,7 +159,6 @@ canvas{
 }
 
 @media (min-width: 1024px) {
-
   .lg\:w-\[15rem\] {
     width: 15rem;
   }
@@ -242,10 +239,8 @@ canvas{
   .lg\:h-full {
     height: 100%;
   }
-
 }
 
-.hide{
+.hide {
   display: none;
 }
-

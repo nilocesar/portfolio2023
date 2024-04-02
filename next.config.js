@@ -19,7 +19,7 @@ module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
-    styledComponents: true,
+    styledComponents: true
     // removeConsole: {
     //   exclude: ['error']
     // }

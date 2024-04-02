@@ -11,10 +11,9 @@ import {
   CarouselPrevious,
   type CarouselApi
 } from '@/shadcn-ui/ui/carousel';
-import { usePageStore } from 'store';
-
 import CardProject from 'components/CardProject';
 import { MotionDiv } from 'components/MotionElement';
+import { usePageStore } from 'store';
 
 import { cn } from 'utils/cn';
 import { timeOther } from 'utils/motionTime';

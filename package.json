@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint2": "yarn eslint --fix src",
+    "prettier:format": "prettier --write .",
+    "prettier:check": "prettier --check \"**/*.{ts,tsx,json}\"",
+    "eslint:format": "eslint src --fix",
     "lint": "next lint"
   },
   "dependencies": {
@@ -54,7 +56,14 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-testing-library": "^6.2.0",
     "lint-staged": "^13.2.3",
     "prettier": "2.8.8"
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "yarn prettier:format",
+      "yarn eslint:format"
+    ]
   }
 }

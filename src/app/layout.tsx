@@ -5,10 +5,9 @@ import type { Metadata } from 'next';
 import { Jura } from 'next/font/google';
 import { ReactNode } from 'react';
 
-import { getCache } from 'hooks/useCache';
-
 import { Canvas } from 'components/Canvas';
 import { Sidebar } from 'components/Sidebar';
+import { getCache } from 'hooks/useCache';
 
 export const metadata: Metadata = {
   title: 'Nilo César',

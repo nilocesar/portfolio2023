@@ -3,9 +3,8 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 
-import { usePageStore } from 'store';
-
 import { MotionDiv, MotionAside } from 'components/MotionElement';
+import { usePageStore } from 'store';
 
 import { timeOther } from 'utils/motionTime';
 

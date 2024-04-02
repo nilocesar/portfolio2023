@@ -2,10 +2,9 @@
 
 import { useEffect } from 'react';
 
-import { usePageStore } from 'store';
-
 import { CardModel } from 'components/CardModel';
 import { MotionDiv } from 'components/MotionElement';
+import { usePageStore } from 'store';
 
 import { timeHome } from 'utils/motionTime';
 
