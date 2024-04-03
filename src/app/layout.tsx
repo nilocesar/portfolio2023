@@ -21,7 +21,9 @@ const ralewayFont = Jura({
   weight: '700'
 });
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export const dynamic = 'force-dynamic';
+
+export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
