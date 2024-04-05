@@ -2,14 +2,13 @@ import { ReactNode } from 'react';
 
 import { Sidebar } from 'components/Sidebar';
 
-import { getCache } from 'hooks/useCache';
+import { modelScreen, dataObj } from 'utils/modelScreen';
 
-export const dynamic = 'force-dynamic';
-
-export function Main({ children }: { children: ReactNode }) {
+export function Main({ currentCache, children }: { currentCache: dataObj; children: ReactNode }) {
+  const { modelSelect } = modelScreen(currentCache);
   return (
-    <main className={`h-screen flex flex-initial flex-wrap ${getCache() ? getCache().base : ''}`}>
-      <Sidebar modelSelect={getCache() ? getCache().sidebar : ''} />
+    <main className={`h-screen flex flex-initial flex-wrap ${modelSelect ? modelSelect.base : ''}`}>
+      <Sidebar modelSelect={modelSelect ? modelSelect.sidebar : ''} />
       {children}
     </main>
   );

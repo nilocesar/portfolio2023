@@ -6,10 +6,9 @@ import { Jura } from 'next/font/google';
 import { ReactNode } from 'react';
 
 import { Canvas } from 'components/Canvas';
-// import { Sidebar } from 'components/Sidebar';
 import { Main } from 'components/Main';
 
-// import { getCache } from 'hooks/useCache';
+import { getCurrentCache } from 'hooks/useCache';
 
 export const metadata: Metadata = {
   title: 'Nilo César',
@@ -22,14 +21,14 @@ const ralewayFont = Jura({
   weight: '700'
 });
 
-// export const dynamic = 'force-dynamic';
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const currentCache = await getCurrentCache();
 
-export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={ralewayFont.className}>
       <body className="bg-white">
         <Canvas />
-        <Main>{children}</Main>
+        <Main currentCache={currentCache}>{children}</Main>
       </body>
     </html>
   );

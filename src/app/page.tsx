@@ -1,6 +1,6 @@
-import HomeContainer from 'components/HomeContainer';
+import HomeContainer from './HomeContainer';
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <HomeContainer />

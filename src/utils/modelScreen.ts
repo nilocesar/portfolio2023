@@ -3,7 +3,13 @@ type modelScreenObj = {
   sidebar: string;
 };
 
-export const modelScreen = (randomModel: number, sb_w: number, sb_h: number) => {
+export type dataObj = {
+  sb_w: number;
+  sb_h: number;
+  randomModel: number;
+};
+
+export const modelScreen = ({ sb_w, sb_h, randomModel }: dataObj) => {
   const sb_w_randow = sb_w; /// valor do width sidebar
   const sb_h_randow = sb_h; /// valor do height sidebar
 
