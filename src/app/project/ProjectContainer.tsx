@@ -1,7 +1,7 @@
 'use client';
 
-// import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState, useCallback, Suspense } from 'react';
 
 import {
   Carousel,
@@ -20,44 +20,67 @@ import { timeOther } from 'utils/motionTime';
 
 import { usePageStore } from 'store';
 
-const ProjectContainer = () => {
-  // const router = useRouter();
-  // const pathname = usePathname();
-  // const searchParams = useSearchParams();
+function CarouselBase({ init }: { init: boolean }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
-  const { init } = usePageStore((res) => {
-    return res.state.page;
-  });
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
 
-  // const createQueryString = useCallback(
-  //   (name: string, value: string) => {
-  //     const params = new URLSearchParams(searchParams.toString());
-  //     params.set(name, value);
-
-  //     return params.toString();
-  //   },
-  //   [searchParams]
-  // );
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   useEffect(() => {
     if (!api) {
       return;
     }
 
-    // const item = searchParams.get('item');
-    const item = '1';
+    const item = searchParams.get('item');
+    // const item = '1';
     setCurrent(Number(item));
     usePageStore.setState({ state: { page: { pageCurrent: 'project' + item, init: false } } });
 
     api.on('select', () => {
       const itemCurrent = api.selectedScrollSnap();
       setCurrent(itemCurrent);
-      // router.push(pathname + '?' + createQueryString('item', itemCurrent.toString()));
+      router.push(pathname + '?' + createQueryString('item', itemCurrent.toString()));
     });
   }, [api]);
+
+  return (
+    <Carousel
+      opts={{
+        align: 'start',
+        startIndex: current
+      }}
+      className="w-full max-h-[100%]"
+      setApi={setApi}
+    >
+      <CarouselContent>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index}>
+            <CardProject data={{}} delay={timeOther(init, 1.2)} />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="text-amber-50 border-none hover:text-amber-200 disabled:opacity-5" />
+      <CarouselNext className="text-amber-50 border-none hover:text-amber-200 disabled:opacity-5" />
+    </Carousel>
+  );
+}
+
+const ProjectContainer = () => {
+  const { init } = usePageStore((res) => {
+    return res.state.page;
+  });
 
   const variantsLine1 = {
     hidden: {
@@ -164,24 +187,9 @@ const ProjectContainer = () => {
               delay: timeOther(init, 1)
             }}
           >
-            <Carousel
-              opts={{
-                align: 'start',
-                startIndex: current
-              }}
-              className="w-full max-h-[100%]"
-              setApi={setApi}
-            >
-              <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index}>
-                    <CardProject data={{}} delay={timeOther(init, 1.2)} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="text-amber-50 border-none hover:text-amber-200 disabled:opacity-5" />
-              <CarouselNext className="text-amber-50 border-none hover:text-amber-200 disabled:opacity-5" />
-            </Carousel>
+            <Suspense>
+              <CarouselBase init={init as boolean} />
+            </Suspense>
           </MotionDiv>
         </div>
       </MotionDiv>

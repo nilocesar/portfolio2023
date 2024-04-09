@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "prettier:format": "prettier --write .",
-    "prettier:check": "prettier --check \"**/*.{ts,tsx,json,js,css,scss}\"",
     "eslint:format": "eslint src --fix",
     "lint": "next lint"
   },

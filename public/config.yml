@@ -14,15 +14,25 @@ slug:
   clean_accents: true
 
 collections:
-  - name: 'blog' # Used in routes, e.g., /admin/collections/blog
-    label: 'Blog' # Used in the UI
-    folder: '_posts/blog' # The path to the folder where the documents are stored
+  - name: 'project' # Used in routes, e.g., /admin/collections/project
+    label: 'Project' # Used in the UI
+    folder: '_posts/project' # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}' # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
-      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'blog' }
-      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'project' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-      - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
-      - { label: 'Rating (scale of 1-5)', name: 'rating', widget: 'number' }
-      - { label: 'Body', name: 'body', widget: 'markdown' }
+      - { label: 'Imagem do Card', name: 'card', widget: 'image' }
+      - { label: 'Imagem do Projeto', name: 'thumbnail', widget: 'image' }
+      - { label: 'Título', name: 'title', widget: 'string' }
+      - { label: 'Descrição', name: 'body', widget: 'markdown' }
+  - name: 'about' # Used in routes, e.g., /admin/collections/about
+    label: 'About' # Used in the UI
+    folder: '_posts/about' # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'about' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Avatar', name: 'avatar', widget: 'image' }
+      - { label: 'Descrição', name: 'body', widget: 'markdown' }
