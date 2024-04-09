@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: nilocesar/portfolio2023
-  base_url: https://portfolio2023-git-feat-slide-nilo-cesars-projects.vercel.app/  # https://portfolio2023-murex-two.vercel.app/
+  base_url: https://portfolio2023-murex-two.vercel.app/
   auth_endpoint: api/auth/ # Essa rota vai ser muito importante mais para frente
 
 media_folder: public/assets/img
