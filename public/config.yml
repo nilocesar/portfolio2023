@@ -3,9 +3,18 @@ backend:
   repo: nilocesar/portfolio2023
   base_url: https://portfolio2023-murex-two.vercel.app/
   auth_endpoint: api/auth/ # Essa rota vai ser muito importante mais para frente
+  commit_messages:
+    create: Create {{collection}} “{{slug}}”
+    update: Update {{collection}} “{{slug}}”
+    delete: Delete {{collection}} “{{slug}}”
+    uploadMedia: Upload “{{path}}”
+    deleteMedia: Delete “{{path}}”
+    openAuthoring: '{{message}}'
 
 media_folder: public/assets/img
 public_folder: /assets/img
+
+site_url: https://portfolio2023-murex-two.vercel.app/image/logo.png
 
 publish_mode: editorial_workflow # Isso permite ter aquele workflow com drafts e tudo
 
