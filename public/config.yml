@@ -14,7 +14,7 @@ backend:
 media_folder: public/assets/img
 public_folder: /assets/img
 
-logo_url: https://portfolio2023-murex-two.vercel.app/image/logo.png
+# logo_url: https://portfolio2023-murex-two.vercel.app/image/logo.png
 
 publish_mode: editorial_workflow # Isso permite ter aquele workflow com drafts e tudo
 
