@@ -31,9 +31,9 @@ collections:
     folder: '_posts/about' # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}' # Filename template, e.g., YYYY-MM-DD-title.md
-    identifier_field: description
     fields: # The fields for each document, usually in front matter
       - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'about' }
+      - { label: 'Título', name: 'title', widget: 'string' }
       - { label: 'Avatar', name: 'avatar', widget: 'image' }
       - { label: 'Descrição', name: 'description', widget: 'markdown' }
       - { label: 'Linkedin', name: 'linkedin', widget: 'string' }
