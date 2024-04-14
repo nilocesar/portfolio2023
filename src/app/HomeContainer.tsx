@@ -7,14 +7,16 @@ import { MotionDiv } from 'components/MotionElement';
 
 import { timeHome } from 'utils/motionTime';
 
-import { usePageStore } from 'store';
+import { usePageStore, useBlogStore } from 'store';
 
 export default function HomeContainer() {
-  const items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   const { pageCurrent } = usePageStore((res) => {
     return res.state.page;
   });
+
+  const { blogs } = useBlogStore.getState();
+
+  console.log(blogs);
 
   useEffect(() => {
     usePageStore.setState({ state: { page: { pageCurrent: 'home', init: false } } });
@@ -45,9 +47,9 @@ export default function HomeContainer() {
         className={`flex-1 max-h-screen overflow-y-scroll relative`}
       >
         <ul className={`relative`}>
-          {items.map((it, i) => {
+          {blogs.map((item, i) => {
             const delay = timeHome(pageCurrent) + i / 10 + 0.5;
-            return <CardModel key={'s' + it} it={it} delay={delay} />;
+            return <CardModel key={item.slug} it={i} data={item} delay={delay} />;
           })}
         </ul>
       </MotionDiv>

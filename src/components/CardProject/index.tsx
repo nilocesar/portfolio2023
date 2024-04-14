@@ -1,7 +1,9 @@
 import { MotionDiv } from 'components/MotionElement';
 
+import { BlogType } from 'store';
+
 interface Prop {
-  data: any;
+  data: BlogType;
   delay: number;
 }
 
@@ -24,7 +26,7 @@ const CardProject = ({ data, delay }: Prop) => {
           >
             <div className="flex flex-col overflow-hidden rounded-lg shadow-2xl">
               <img
-                src="https://www.thehindu.com/entertainment/qh3fnb/article29475886.ece/ALTERNATES/LANDSCAPE_1200/batman-day"
+                src={data.thumbnail}
                 alt="Lorem ipsum dolor sit amet"
                 className="object-cover w-full h-full"
               />
@@ -45,19 +47,17 @@ const CardProject = ({ data, delay }: Prop) => {
               Lorem ipsum dolor sit
             </p> */}
             <h2 className="mt-5 text-3xl lg:text-4xl font-bold text-amber-100 uppercase">
-              Lorem ipsum dolor sit
+              {data.title}
             </h2>
-            <p className="mt-3  xl:text-xl text-amber-100">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu sem iaculis,
-            </p>
+            <p className="mt-3  xl:text-xl text-amber-100">{data.title}</p>
 
             <a
-              href="#0"
+              href={data.title}
               className="flex items-center mt-8 font-medium text-amber-500 underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span>View Project</span>
+              <span>Veja o projeto em ação</span>
             </a>
           </MotionDiv>
         </div>

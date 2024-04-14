@@ -3,12 +3,15 @@ import Link from 'next/link';
 
 import { MotionDiv, MotionLi, MotionVideo } from 'components/MotionElement';
 
+import { BlogType } from 'store';
+
 type Props = {
   it: number;
   delay: number;
+  data: BlogType;
 };
 
-export function CardModel({ it, delay }: Props) {
+export function CardModel({ it, data, delay }: Props) {
   // const iosDevice = (window !== undefined) ? window.getComputedStyle(document.documentElement).getPropertyValue('--isDEVICE') : null ;
   const isIOS = String('s') === 'ok'; /// String(iosDevice)
 
@@ -90,7 +93,7 @@ export function CardModel({ it, delay }: Props) {
           }}
         >
           <Image
-            src={`https://picsum.photos/600/400`}
+            src={data.card}
             alt=""
             fill
             className={`object-cover transition-opacity ease-in-out opacity-[0.3] duration-[1s] hover:opacity-[0.7] cursor-pointer`}

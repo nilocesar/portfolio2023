@@ -34,7 +34,8 @@ collections:
       - { label: 'Imagem do Card', name: 'card', widget: 'image' }
       - { label: 'Imagem do Projeto', name: 'thumbnail', widget: 'image' }
       - { label: 'Título', name: 'title', widget: 'string' }
-      - { label: 'Descrição', name: 'body', widget: 'markdown' }
+      - { label: 'LINK', name: 'link', widget: 'string' }
+      - { label: 'Descrição', name: 'description', widget: 'markdown' }
   - name: 'about' # Used in routes, e.g., /admin/collections/about
     label: 'About' # Used in the UI
     folder: '_posts/about' # The path to the folder where the documents are stored

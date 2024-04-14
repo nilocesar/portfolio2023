@@ -18,7 +18,7 @@ import { MotionDiv } from 'components/MotionElement';
 import { cn } from 'utils/cn';
 import { timeOther } from 'utils/motionTime';
 
-import { usePageStore } from 'store';
+import { usePageStore, useBlogStore } from 'store';
 
 function CarouselBase({ init }: { init: boolean }) {
   const router = useRouter();
@@ -55,6 +55,10 @@ function CarouselBase({ init }: { init: boolean }) {
     });
   }, [api]);
 
+  const { blogs } = useBlogStore.getState();
+
+  console.log(blogs);
+
   return (
     <Carousel
       opts={{
@@ -65,9 +69,9 @@ function CarouselBase({ init }: { init: boolean }) {
       setApi={setApi}
     >
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {blogs?.map((item, index) => (
           <CarouselItem key={index}>
-            <CardProject data={{}} delay={timeOther(init, 1.2)} />
+            <CardProject data={item} delay={timeOther(init, 1.2)} />
           </CarouselItem>
         ))}
       </CarouselContent>

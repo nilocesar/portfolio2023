@@ -19,10 +19,10 @@ module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
-    styledComponents: true,
-    removeConsole: {
-      exclude: ['error']
-    }
+    styledComponents: true
+    // removeConsole: {
+    //   exclude: ['error']
+    // }
   },
   webpack: (cfg) => {
     cfg.module.rules.push({
