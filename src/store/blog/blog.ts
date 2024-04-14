@@ -2,10 +2,10 @@ import { create } from 'zustand';
 
 export interface BlogType {
   layout?: string;
-  date?: string | number;
-  card?: string;
-  thumbnail?: string;
-  title?: string;
+  date?: string;
+  card: string;
+  thumbnail: string;
+  title: string;
   link?: string;
   description?: string;
   slug?: string;
