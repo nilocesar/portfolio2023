@@ -1,7 +1,7 @@
 import { MotionDiv } from 'components/MotionElement';
+import Markdown from 'markdown-to-jsx';
 
 import { BlogType } from 'store';
-
 interface Prop {
   data: BlogType;
   delay: number;
@@ -9,6 +9,7 @@ interface Prop {
 
 const CardProject = ({ data, delay }: Prop) => {
   console.log(data);
+  // console.log(mdToHtml(data.description as string));
 
   return (
     <>
@@ -49,10 +50,12 @@ const CardProject = ({ data, delay }: Prop) => {
             <h2 className="mt-5 text-3xl lg:text-4xl font-bold text-amber-100 uppercase">
               {data.title}
             </h2>
-            <p className="mt-3  xl:text-xl text-amber-100">{data.title}</p>
+            <p className="mt-3  xl:text-xl text-amber-100">
+              <Markdown>{data.description as string}</Markdown>
+            </p>
 
             <a
-              href={data.title}
+              href={data.link}
               className="flex items-center mt-8 font-medium text-amber-500 underline"
               target="_blank"
               rel="noopener noreferrer"

@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const filesInBlogs = fs.readdirSync('./_posts/project');
 
   // Get the front matter and slug (the filename without .md) of all files
-  const blogs: BlogType[] = await filesInBlogs.map((filename) => {
+  const blogs: BlogType[] = filesInBlogs.map((filename) => {
     const file = fs.readFileSync(`./_posts/project/${filename}`, 'utf8');
     const matterData = matter(file);
 
