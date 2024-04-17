@@ -139,7 +139,7 @@ export const Canvas = () => {
                 ctx.shadowColor = 'rgba(0,0,0,0.05)';
               }
               ctx.lineWidth = d + c;
-              ctx.strokeStyle = '#000';
+              ctx.strokeStyle = '#292101';
               ctx.lineCap = 'round';
               ctx.stroke();
               ctx.closePath();

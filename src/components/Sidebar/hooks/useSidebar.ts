@@ -15,8 +15,6 @@ const useSidebar = (videoRef: VideoElement, DELAY_INIT: number) => {
       const ref = videoRef.current;
       const progress = (ref.currentTime / ref.duration) * 100 || 0;
 
-      console.log(logoStatus, pageCurrent, progress);
-
       if (logoStatus === 'init') {
         if (progress >= 35 && pageCurrent === 'home') {
           ref.pause();

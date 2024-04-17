@@ -16,8 +16,6 @@ export default function HomeContainer() {
 
   const { blogs } = useBlogStore.getState();
 
-  console.log(blogs);
-
   useEffect(() => {
     usePageStore.setState({ state: { page: { pageCurrent: 'home', init: false } } });
   }, []);
@@ -46,12 +44,10 @@ export default function HomeContainer() {
         animate="visible"
         className={`flex-1 max-h-screen overflow-y-scroll relative`}
       >
-        <ul className={`relative`}>
-          {blogs.map((item, i) => {
-            const delay = timeHome(pageCurrent) + i / 10 + 0.5;
-            return <CardModel key={item.slug} it={i} data={item} delay={delay} />;
-          })}
-        </ul>
+        {blogs.map((item, i) => {
+          const delay = timeHome(pageCurrent) + i / 10 + 0.5;
+          return <CardModel key={item.slug} it={i} data={item} delay={delay} />;
+        })}
       </MotionDiv>
     </>
   );

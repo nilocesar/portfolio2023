@@ -46,7 +46,7 @@ function CarouselBase({ init }: { init: boolean }) {
     const item = searchParams.get('item');
     // const item = '1';
     setCurrent(Number(item));
-    usePageStore.setState({ state: { page: { pageCurrent: 'project' + item, init: false } } });
+    usePageStore.setState({ state: { page: { pageCurrent: item as string, init: false } } });
 
     api.on('select', () => {
       const itemCurrent = api.selectedScrollSnap();
@@ -57,7 +57,7 @@ function CarouselBase({ init }: { init: boolean }) {
 
   const { blogs } = useBlogStore.getState();
 
-  console.log(blogs);
+  // console.log(blogs);
 
   return (
     <Carousel

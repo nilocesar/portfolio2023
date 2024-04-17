@@ -13,7 +13,7 @@ type Props = {
 
 export function CardModel({ it, data, delay }: Props) {
   // const iosDevice = (window !== undefined) ? window.getComputedStyle(document.documentElement).getPropertyValue('--isDEVICE') : null ;
-  const isIOS = String('s') === 'ok'; /// String(iosDevice)
+  const isIOS = false; /// String(iosDevice)
 
   // if (typeof window !== 'undefined') {
   //   console.log('window.innerHeight', window);
@@ -37,11 +37,11 @@ export function CardModel({ it, data, delay }: Props) {
   };
 
   return (
-    <MotionLi
+    <MotionDiv
       variants={variantsLi}
       initial="hidden"
       animate="visible"
-      className={`relative h-[7rem] sm:h-[14rem] w-full border-b-[0.2rem] border-neutral-500 block`}
+      className={`relative h-[7rem] sm:h-[14rem] w-full border-b-[0.2rem] border-neutral-200 block`}
     >
       {isIOS ? (
         <Image
@@ -94,13 +94,13 @@ export function CardModel({ it, data, delay }: Props) {
         >
           <Image
             src={data.card}
-            alt=""
             fill
             className={`object-cover transition-opacity ease-in-out opacity-[0.3] duration-[1s] hover:opacity-[0.7] cursor-pointer`}
             // onLoadingComplete={(img) => imgLoading(img)}
+            alt={data.description as string}
           />
         </MotionDiv>
       </Link>
-    </MotionLi>
+    </MotionDiv>
   );
 }

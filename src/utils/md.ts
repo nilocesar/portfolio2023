@@ -1,10 +1,32 @@
-// import { remark } from 'remark';
-// import html from 'remark-html';
+import fs from 'fs';
+import matter from 'gray-matter';
 
-// export const mdToHtml = async (content:string) => {
-//   const processedContent = await remark().use(html).process(content);
-//   const contentHtml = processedContent.toString();
-//   console.log(contentHtml)
+import { BlogType, AboutType } from 'store';
 
-//   return contentHtml;
-// }
+export const mdBlogs = () => {
+  // List of files in blgos folder
+  const filesInBlogs = fs.readdirSync('./_posts/project');
+  const filesInAbout = fs.readdirSync('./_posts/about');
+
+  const blogs = filesInBlogs.map((filename) => {
+    const file = fs.readFileSync(`./_posts/project/${filename}`, 'utf8');
+    const matterData = matter(file);
+
+    return {
+      ...(matterData.data as BlogType),
+      slug: filename.slice(0, filename.indexOf('.'))
+    };
+  });
+
+  const about = filesInAbout.map((filename) => {
+    const file = fs.readFileSync(`./_posts/about/${filename}`, 'utf8');
+    const matterData = matter(file);
+
+    return {
+      ...(matterData.data as AboutType),
+      slug: filename.slice(0, filename.indexOf('.'))
+    };
+  });
+
+  return { blogs: blogs, about: about[0] as AboutType };
+};

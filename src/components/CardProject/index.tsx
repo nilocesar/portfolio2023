@@ -1,5 +1,7 @@
-import { MotionDiv } from 'components/MotionElement';
+import Image from 'next/image';
 import Markdown from 'markdown-to-jsx';
+
+import { MotionDiv } from 'components/MotionElement';
 
 import { BlogType } from 'store';
 interface Prop {
@@ -8,7 +10,7 @@ interface Prop {
 }
 
 const CardProject = ({ data, delay }: Prop) => {
-  console.log(data);
+  // console.log(data);
   // console.log(mdToHtml(data.description as string));
 
   return (
@@ -25,11 +27,17 @@ const CardProject = ({ data, delay }: Prop) => {
             }}
             className="w-full lg:w-1/2 xl:w-1/2"
           >
-            <div className="flex flex-col overflow-hidden rounded-lg shadow-2xl">
-              <img
+            <div className="relative aspect-[16/9] flex flex-col overflow-hidden rounded-lg shadow-2xl">
+              {/* <img
                 src={data.thumbnail}
                 alt="Lorem ipsum dolor sit amet"
                 className="object-cover w-full h-full"
+              /> */}
+              <Image
+                src={data.thumbnail}
+                fill
+                className="relative object-cover w-full h-full"
+                alt={data.description as string}
               />
             </div>
           </MotionDiv>
@@ -42,7 +50,7 @@ const CardProject = ({ data, delay }: Prop) => {
               type: 'Spring',
               delay: delay
             }}
-            className="w-full pt-12 lg:w-1/2 xl:w-1/2 lg:pl-12 lg:pt-0"
+            className="w-full py-12 lg:w-1/2 xl:w-1/2 lg:pl-12 lg:pt-0"
           >
             {/* <p className="text-sm font-bold tracking-wide text-amber-200 uppercase">
               Lorem ipsum dolor sit

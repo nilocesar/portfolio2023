@@ -5,13 +5,12 @@ import type { Metadata } from 'next';
 import { Jura } from 'next/font/google';
 import { ReactNode } from 'react';
 
-import fs from 'fs';
-import matter from 'gray-matter';
-
 import { Canvas } from 'components/Canvas';
 import { Main } from 'components/Main';
 
-import { useBlogStore, InitializeBlogStore, BlogType } from 'store';
+import { mdBlogs } from 'utils/md';
+
+import { useBlogStore, InitializeBlogStore } from 'store';
 
 import { getCurrentCache } from 'hooks/useCache';
 
@@ -29,28 +28,15 @@ const ralewayFont = Jura({
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const currentCache = await getCurrentCache();
 
-  // List of files in blgos folder
-  const filesInBlogs = fs.readdirSync('./_posts/project');
-
   // Get the front matter and slug (the filename without .md) of all files
-  const blogs: BlogType[] = filesInBlogs.map((filename) => {
-    const file = fs.readFileSync(`./_posts/project/${filename}`, 'utf8');
-    const matterData = matter(file);
-
-    return {
-      ...(matterData.data as BlogType),
-      slug: filename.slice(0, filename.indexOf('.'))
-    };
-  });
-
-  console.log(blogs);
-  useBlogStore.setState({ blogs: blogs ?? [] });
+  const { blogs, about } = mdBlogs();
+  useBlogStore.setState({ blogs: blogs ?? [], about: about ?? {} });
 
   return (
-    <html lang="en" className={ralewayFont.className}>
-      <body className="bg-white">
+    <html lang="en" className={`${ralewayFont.className} antialiased`}>
+      <body className="bg-white antialiased">
         <Canvas />
-        <InitializeBlogStore blogs={blogs ?? []} />
+        <InitializeBlogStore blogs={blogs ?? []} about={about ?? {}} />
         <Main currentCache={currentCache}>{children}</Main>
       </body>
     </html>
