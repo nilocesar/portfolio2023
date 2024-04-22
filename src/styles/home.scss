@@ -1,0 +1,19 @@
+.home {
+  .spritesheetImg {
+    display: none;
+  }
+  .spritesheetVideo {
+    display: block;
+  }
+
+  //Controle para safari IOS - trocar o video por uma imagem
+  @supports (-webkit-touch-callout: none) {
+    .spritesheetImg {
+      display: block;
+    }
+
+    .spritesheetVideo {
+      display: none;
+    }
+  }
+}

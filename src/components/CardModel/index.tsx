@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { MotionDiv, MotionLi, MotionVideo } from 'components/MotionElement';
+import { MotionDiv, MotionVideo } from 'components/MotionElement';
 
 import { BlogType } from 'store';
 
@@ -12,14 +12,6 @@ type Props = {
 };
 
 export function CardModel({ it, data, delay }: Props) {
-  // const iosDevice = (window !== undefined) ? window.getComputedStyle(document.documentElement).getPropertyValue('--isDEVICE') : null ;
-  const isIOS = false; /// String(iosDevice)
-
-  // if (typeof window !== 'undefined') {
-  //   console.log('window.innerHeight', window);
-  // }
-  // console.log(isIOS);
-
   const variantsLi = {
     hidden: {
       display: 'none'
@@ -36,6 +28,22 @@ export function CardModel({ it, data, delay }: Props) {
     }
   };
 
+  const variantsImg = {
+    hidden: {
+      opacity: 0
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        opacity: {
+          duration: 1,
+          ease: 'easeInOut',
+          delay: delay
+        }
+      }
+    }
+  };
+
   return (
     <MotionDiv
       variants={variantsLi}
@@ -43,34 +51,39 @@ export function CardModel({ it, data, delay }: Props) {
       animate="visible"
       className={`relative h-[7rem] sm:h-[14rem] w-full border-b-[0.2rem] border-neutral-200 block`}
     >
-      {isIOS ? (
+      <MotionDiv
+        variants={variantsImg}
+        initial="hidden"
+        animate="visible"
+        className={`spritesheetImg h-[100%] w-full absolute`}
+      >
         <Image
           src={'/image/spritesheet2.png'}
           alt=""
           fill
           className={`h-[100%] w-full object-cover absolute`}
         />
-      ) : (
-        <MotionVideo
-          src="./spritesheet.webm"
-          className={`h-[100%] w-full object-cover absolute`}
-          autoPlay={true}
-          loop={false}
-          muted
-          initial={{
-            opacity: 0.8
-          }}
-          animate={{
-            opacity: 0
-            // display: 'none'
-          }}
-          transition={{
-            duration: 0.3,
-            ease: 'easeInOut',
-            delay: delay + 2
-          }}
-        />
-      )}
+      </MotionDiv>
+
+      <MotionVideo
+        src="./spritesheet.webm"
+        className={`spritesheetVideo h-[100%] w-full object-cover absolute`}
+        autoPlay={true}
+        loop={false}
+        muted
+        initial={{
+          opacity: 0.8
+        }}
+        animate={{
+          opacity: 0
+          // display: 'none'
+        }}
+        transition={{
+          duration: 0.3,
+          ease: 'easeInOut',
+          delay: delay + 2
+        }}
+      />
 
       <Link
         href={{
@@ -78,6 +91,7 @@ export function CardModel({ it, data, delay }: Props) {
           query: { item: it }
         }}
         className={''}
+        data-testid="linkProject"
       >
         <MotionDiv
           initial={{
@@ -95,7 +109,7 @@ export function CardModel({ it, data, delay }: Props) {
           <Image
             src={data.card}
             fill
-            className={`object-cover transition-opacity ease-in-out opacity-[0.3] duration-[1s] hover:opacity-[0.7] cursor-pointer`}
+            className={`object-cover transition-opacity ease-in-out opacity-[0.3] duration-1000 hover:opacity-[0.7] cursor-pointer`}
             // onLoadingComplete={(img) => imgLoading(img)}
             alt={data.description as string}
           />

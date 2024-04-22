@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --isDEVICE: all;
-}
-
-@supports (-webkit-touch-callout: none) {
-  :root {
-    --isDEVICE: ok;
-  }
-}
-
 @layer base {
   :root {
     --font-mono: 'Fira Mono, monospace';

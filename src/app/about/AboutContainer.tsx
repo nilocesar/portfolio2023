@@ -1,97 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect } from 'react';
-
 import Markdown from 'markdown-to-jsx';
 
 import { MotionDiv, MotionAside } from 'components/MotionElement';
+import { cn } from 'utils/cn';
 
-import { cn } from '@/utils/cn';
-import { timeOther } from 'utils/motionTime';
-
-import { usePageStore, useBlogStore } from 'store';
+import useAbout from './hooks/useAbout';
 
 const AboutContainer = () => {
-  const { init } = usePageStore((res) => {
-    return res.state.page;
-  });
-
-  useEffect(() => {
-    usePageStore.setState({ state: { page: { pageCurrent: 'about', init: false } } });
-  }, [usePageStore]);
-
-  const variants = {
-    hidden: { display: 'none' },
-    visible: { display: 'block' }
-  };
-
-  const variantsLine1 = {
-    hidden: {
-      display: 'none',
-      border: '2px solid transparent',
-      width: 0,
-      height: 0,
-      top: 0,
-      left: 0
-    },
-    visible: {
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      borderTopColor: 'rgba(255 251 235, 1)',
-      borderRightColor: 'rgba(255 251 235, 1)',
-      transition: {
-        width: {
-          duration: 0.25,
-          ease: 'easeInOut',
-          delay: timeOther(init)
-        },
-        height: {
-          duration: 0.25,
-          ease: 'easeInOut',
-          delay: timeOther(init, 0.25)
-        }
-      }
-    }
-  };
-
-  const variantsLine2 = {
-    hidden: {
-      display: 'none',
-      border: '2px solid transparent',
-      width: 0,
-      height: 0,
-      bottom: 0,
-      right: 0
-    },
-    visible: {
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      borderBottomColor: 'rgba(255 251 235, 1)',
-      borderLeftColor: 'rgba(255 251 235, 1)',
-      transition: {
-        borderColor: {
-          duration: 0,
-          ease: 'easeInOut',
-          delay: timeOther(init, 0.5)
-        },
-        width: {
-          duration: 0.25,
-          ease: 'easeInOut',
-          delay: timeOther(init, 0.5)
-        },
-        height: {
-          duration: 0.25,
-          ease: 'easeInOut',
-          delay: timeOther(init, 0.75)
-        }
-      }
-    }
-  };
-
-  const { about } = useBlogStore.getState();
+  const { variants, variantsLine1, variantsLine2, about, init, timeOther } = useAbout();
 
   return (
     <>
@@ -148,7 +66,7 @@ const AboutContainer = () => {
               </div>
               <div className={'profile-container flex flex-1 flex-col justify-center items-center'}>
                 <h2 className="text-center text-2xl font-semibold mt-3 text-amber-400">
-                  Nilo César
+                  {about.title}
                 </h2>
                 <p className="text-center text-amber-100 mt-1">FRONT-END</p>
                 <div className="flex justify-center mt-5 border-amber-200 border-b pb-4 w-full">

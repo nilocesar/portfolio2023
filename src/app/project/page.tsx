@@ -18,11 +18,10 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const about = useBlogStore.getState().about;
 
   return {
-    title: about.title + " | Projetos",
+    title: about.title + ' | Projetos',
     description: about.description
   };
 }
-
 
 export default function Project() {
   return (

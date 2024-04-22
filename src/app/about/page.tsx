@@ -4,7 +4,6 @@ import { useBlogStore } from 'store';
 
 import AboutContainer from './AboutContainer';
 
-
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };

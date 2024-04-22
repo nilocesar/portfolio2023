@@ -10,8 +10,9 @@ import { DELAY_INIT } from 'utils/constants';
 
 import useSidebar from '../../hooks/useSidebar';
 
+import { cn } from 'utils/cn';
+
 const SignatureTop = () => {
-  const isIOS = false;
   const router = useRouter();
 
   const callHome = () => {
@@ -40,9 +41,10 @@ const SignatureTop = () => {
       className={'logoBase relative pl-5 pt-10'}
     >
       <MotionDiv
-        className={`logoClose cursor-pointer ${
-          pageCurrent === 'home' ? 'pointer-events-none' : ''
-        }`}
+        className={cn(
+          `logoClose cursor-pointer`,
+          `${pageCurrent === 'home' ? 'pointer-events-none' : ''}`
+        )}
         onClick={() => {
           callHome();
         }}
@@ -62,32 +64,21 @@ const SignatureTop = () => {
           delay: DELAY_INIT + 1
         }}
       >
-        {isIOS ? (
-          pageCurrent === 'home' ? (
-            <Image
-              src={`/image/logo.png`}
-              alt=""
-              fill
-              className={`cursor-pointer object-contain object-left-top animate-fadeInInit`}
-            />
-          ) : (
-            <Image
-              src={`/image/close.png`}
-              alt=""
-              fill
-              className={`cursor-pointer object-contain object-left-top animate-fadeInInit`}
-            />
-          )
-        ) : (
-          <video
-            ref={videoRef as MutableRefObject<HTMLVideoElement>}
-            src="./logo.webm"
-            muted
-            onTimeUpdate={() => handleOnTimeUpdate()}
-            onEnded={() => handleOnEnded()}
-            className={`logo ${logoAnimate}`}
-          />
-        )}
+        <Image
+          src={pageCurrent === 'home' ? `/image/logo.png` : '/image/close.png'}
+          alt=""
+          fill
+          className={`logoImg cursor-pointer object-contain object-left-top animate-fadeInInit`}
+        />
+
+        <video
+          ref={videoRef as MutableRefObject<HTMLVideoElement>}
+          src="./logo.webm"
+          muted
+          onTimeUpdate={() => handleOnTimeUpdate()}
+          onEnded={() => handleOnEnded()}
+          className={`logo logoVideo ${logoAnimate}`}
+        />
       </MotionDiv>
 
       <MotionP

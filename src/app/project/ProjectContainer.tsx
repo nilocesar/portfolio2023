@@ -1,155 +1,17 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, useCallback, Suspense } from 'react';
+import { Suspense } from 'react';
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi
-} from '@/shadcn-ui/ui/carousel';
-
-import CardProject from 'components/CardProject';
+import CarouselProject from 'components/CarouselProject';
 import { MotionDiv } from 'components/MotionElement';
 
 import { cn } from 'utils/cn';
 import { timeOther } from 'utils/motionTime';
 
-import { usePageStore, useBlogStore } from 'store';
-
-function CarouselBase({ init }: { init: boolean }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    const item = searchParams.get('item');
-    // const item = '1';
-    setCurrent(Number(item));
-    usePageStore.setState({ state: { page: { pageCurrent: item as string, init: false } } });
-
-    api.on('select', () => {
-      const itemCurrent = api.selectedScrollSnap();
-      setCurrent(itemCurrent);
-      router.push(pathname + '?' + createQueryString('item', itemCurrent.toString()));
-    });
-  }, [api]);
-
-  const { blogs } = useBlogStore.getState();
-
-  // console.log(blogs);
-
-  return (
-    <Carousel
-      opts={{
-        align: 'start',
-        startIndex: current
-      }}
-      className="w-full max-h-[100%]"
-      setApi={setApi}
-    >
-      <CarouselContent>
-        {blogs?.map((item, index) => (
-          <CarouselItem key={index}>
-            <CardProject data={item} delay={timeOther(init, 1.2)} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="text-amber-50 border-none hover:text-amber-200 disabled:opacity-5" />
-      <CarouselNext className="text-amber-50 border-none hover:text-amber-200 disabled:opacity-5" />
-    </Carousel>
-  );
-}
+import useProject from './hooks/useProject';
 
 const ProjectContainer = () => {
-  const { init } = usePageStore((res) => {
-    return res.state.page;
-  });
-
-  const variantsLine1 = {
-    hidden: {
-      display: 'none',
-      border: '2px solid transparent',
-      width: 0,
-      height: 0,
-      top: 0,
-      left: 0
-    },
-    visible: {
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      borderTopColor: 'rgba(255 251 235, 1)',
-      borderRightColor: 'rgba(255 251 235, 1)',
-      transition: {
-        width: {
-          duration: 0.25,
-          ease: 'easeInOut',
-          delay: timeOther(init)
-        },
-        height: {
-          duration: 0.25,
-          ease: 'easeInOut',
-          delay: timeOther(init, 0.25)
-        }
-      }
-    }
-  };
-
-  const variantsLine2 = {
-    hidden: {
-      display: 'none',
-      border: '2px solid transparent',
-      width: 0,
-      height: 0,
-      bottom: 0,
-      right: 0
-    },
-    visible: {
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      borderBottomColor: 'rgba(255 251 235, 1)',
-      borderLeftColor: 'rgba(255 251 235, 1)',
-      transition: {
-        borderColor: {
-          duration: 0,
-          ease: 'easeInOut',
-          delay: timeOther(init, 0.5)
-        },
-        width: {
-          duration: 0.25,
-          ease: 'easeInOut',
-          delay: timeOther(init, 0.5)
-        },
-        height: {
-          duration: 0.25,
-          ease: 'easeInOut',
-          delay: timeOther(init, 0.75)
-        }
-      }
-    }
-  };
+  const { init, variantsLine1, variantsLine2 } = useProject();
 
   return (
     <>
@@ -192,7 +54,7 @@ const ProjectContainer = () => {
             }}
           >
             <Suspense>
-              <CarouselBase init={init as boolean} />
+              <CarouselProject init={init as boolean} />
             </Suspense>
           </MotionDiv>
         </div>
